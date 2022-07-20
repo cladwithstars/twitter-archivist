@@ -10,7 +10,6 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import axios from "axios";
-import { urlPath } from "../shared/constants";
 
 const SaveTweetForm = () => {
   const [id, setId] = useState("");

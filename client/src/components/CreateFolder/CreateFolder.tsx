@@ -8,6 +8,10 @@ import {
   TextField,
 } from "@mui/material";
 
+import { CREATE_FOLDER_PATH } from "../../shared/constants";
+
+import axios from "axios";
+
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -27,8 +31,19 @@ const CreateFolder = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const createFolder = async () => {
+    try {
+      await axios.post(CREATE_FOLDER_PATH, { name: folderName });
+      setOpen(false);
+      setFolderName("");
+    } catch {
+      console.error("couldnt create folder");
+    }
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    createFolder();
   };
   return (
     <>
