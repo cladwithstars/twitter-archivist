@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 
-import { CREATE_FOLDER_PATH } from "../../shared/constants";
+import { CREATE_FOLDER_PATH, COLOURS } from "../../shared/constants";
 
 import axios from "axios";
 
@@ -19,13 +19,13 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: `2px solid ${COLOURS.darkPurple} `,
   boxShadow: 24,
   p: 4,
 };
 
 const CreateFolder = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [folderName, setFolderName] = useState("");
 
   const handleOpen = () => setOpen(true);
@@ -47,7 +47,9 @@ const CreateFolder = () => {
   };
   return (
     <>
-      <Button onClick={handleOpen}>Create Folder</Button>
+      <Button onClick={handleOpen} variant="contained" sx={{ width: "80%" }}>
+        Create Folder
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -60,11 +62,12 @@ const CreateFolder = () => {
           </Typography>
           <form onSubmit={handleSubmit}>
             <FormControl
-              fullWidth
               sx={{
                 padding: 2,
+                paddingLeft: 0,
                 borderRadius: 2,
-                borderColor: "primary.main",
+                // borderColor: "primary.main",
+                width: "100%",
               }}
             >
               <TextField

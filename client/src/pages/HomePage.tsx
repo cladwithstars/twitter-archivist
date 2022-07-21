@@ -11,10 +11,10 @@ const HomePage = () => {
         <SaveTweetForm />
       </Grid>
       <Grid item>
-        <MyFolders />
+        <CreateFolder />
       </Grid>
       <Grid item>
-        <CreateFolder />
+        <MyFolders />
       </Grid>
     </Grid>
   );

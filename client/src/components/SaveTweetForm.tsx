@@ -22,6 +22,7 @@ const SaveTweetForm = () => {
         sx={{
           padding: 2,
           margin: "10px",
+          width: "80%",
         }}
       >
         <TextField
