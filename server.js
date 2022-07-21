@@ -14,6 +14,7 @@ app.use(express.json({ extended: false })); //now we can accept body data
 
 //Define Routes
 app.use("/api/folders", require("./routes/folders"));
+app.use("/api/tweets", require("./routes/tweets"));
 
 //Serve static assets in production
 if (process.env.NODE_ENV === "production") {

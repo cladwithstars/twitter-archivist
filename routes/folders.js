@@ -10,7 +10,7 @@ router.post("/createFolder", async (req, res) => {
   try {
     const newFolder = new Folder({
       name,
-      tweets: [],
+      tweets: [{ text: "test" }],
     });
     const folder = await newFolder.save();
     res.json(folder);

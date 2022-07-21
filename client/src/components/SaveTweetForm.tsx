@@ -11,17 +11,20 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
+import { SAVE_TWEET_PATH } from "../shared/constants";
+
 const SaveTweetForm = () => {
   const [id, setId] = useState("");
   const [folder, setFolder] = useState("");
   const saveTweet = async () => {
-    // const {data} = axios.post()
+    const { data } = await axios.post(SAVE_TWEET_PATH, { id, folder });
+    console.log(data);
   };
-  const handleFolderChange = (e: any) => {
-    setFolder(e.target.value);
-  };
+  const handleFolderChange = (e: any) => setFolder(e.target.value);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    saveTweet();
   };
   return (
     <form onSubmit={handleSubmit}>
