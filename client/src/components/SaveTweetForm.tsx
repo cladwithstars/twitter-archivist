@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  TextField,
-  Button,
-  Grid,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { TextField, Button, FormControl, MenuItem } from "@mui/material";
 import axios from "axios";
 
 import { SAVE_TWEET_PATH } from "../shared/constants";
@@ -17,8 +8,7 @@ const SaveTweetForm = () => {
   const [id, setId] = useState("");
   const [folder, setFolder] = useState("");
   const saveTweet = async () => {
-    const { data } = await axios.post(SAVE_TWEET_PATH, { id, folder });
-    console.log(data);
+    await axios.post(SAVE_TWEET_PATH, { id, folder });
   };
   const handleFolderChange = (e: any) => setFolder(e.target.value);
 

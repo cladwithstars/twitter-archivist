@@ -8,7 +8,6 @@ const TweetSchema = mongoose.Schema({
   url: {
     type: String,
     required: true,
-    // unique: true,
   },
   username: {
     type: String,

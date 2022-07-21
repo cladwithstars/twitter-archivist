@@ -6,7 +6,7 @@ const FolderSchema = mongoose.Schema({
     required: true,
   },
   tweets: {
-    type: Array, // ?
+    type: Array,
     required: true,
   },
   date: {
