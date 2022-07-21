@@ -25,7 +25,7 @@ const style = {
 };
 
 const CreateFolder = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
 
   const handleOpen = () => setOpen(true);

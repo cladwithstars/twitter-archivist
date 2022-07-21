@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import HomePage from "./pages/HomePage";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Folder from "./components/Folder";
+import { FolderContext } from "./context/FolderContext";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 function App() {
+  const [folders, setFolders] = useContext(FolderContext);
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>Super Twitter Bookmarks</h1>
+        <Link to="/">
+          <h1>Super Twitter Bookmarks</h1>
+        </Link>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          {folders.map(({ name }) => (
+            <Route
+              key={name}
+              path="folder/:name"
+              element={<Folder name={name} />}
+            />
+          ))}
         </Routes>
       </div>
     </BrowserRouter>

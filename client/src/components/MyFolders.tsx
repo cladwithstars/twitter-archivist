@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { GET_FOLDERS_PATH } from "../shared/constants";
+import React, { useContext } from "react";
+import { FolderContext } from "../context/FolderContext";
+import { Link } from "react-router-dom";
 
 const MyFolders = () => {
-  const [folders, setFolders] = useState<Array<any> | null>(null);
-  const getFolders = async () => {
-    try {
-      const { data } = await axios.get(GET_FOLDERS_PATH);
-      setFolders(data);
-    } catch {
-      console.error("could not fetch folders");
-    }
-  };
-  useEffect(() => {
-    getFolders();
-  }, []);
+  const [folders, setFolders] = useContext(FolderContext);
   return (
     <div>
       <h2>MyFolders</h2>
       <ul>
-        {folders &&
-          folders.length &&
-          folders.map((folder) => <li>{folder.name}</li>)}
+        {folders?.length &&
+          folders.map(({ name }) => (
+            <li key={name}>
+              <Link to={`/folder/${name}`}>{name}</Link>
+            </li>
+          ))}
       </ul>
     </div>
   );

@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextField, Button, FormControl, MenuItem } from "@mui/material";
 import axios from "axios";
+import { FolderContext } from "../context/FolderContext";
 
 import { SAVE_TWEET_PATH } from "../shared/constants";
 
 const SaveTweetForm = () => {
+  const [folders, setFolders] = useContext(FolderContext);
   const [id, setId] = useState("");
-  const [folder, setFolder] = useState("");
+  const [folderName, setFolderName] = useState("");
   const saveTweet = async () => {
-    await axios.post(SAVE_TWEET_PATH, { id, folder });
+    try {
+      await axios.post(SAVE_TWEET_PATH, { id, folder: folderName });
+      setId("");
+      setFolderName("");
+    } catch {
+      console.error("could not save tweet");
+    }
   };
-  const handleFolderChange = (e: any) => setFolder(e.target.value);
+  const handleFolderChange = (e) => setFolderName(e.target.value);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     saveTweet();
   };
@@ -38,19 +46,21 @@ const SaveTweetForm = () => {
         <FormControl sx={{ paddingBottom: 2 }}>
           <TextField
             id="demo-simple-select"
-            value={folder}
+            value={folderName}
             select
             required
             label="Select Folder"
             onChange={handleFolderChange}
           >
-            <MenuItem value={"Ten"}>Ten</MenuItem>
-            <MenuItem value={"Twenty"}>Twenty</MenuItem>
-            <MenuItem value={"Thirty"}>Thirty</MenuItem>
+            {folders.map(({ name }) => (
+              <MenuItem value={name} key={name}>
+                {name}
+              </MenuItem>
+            ))}
           </TextField>
         </FormControl>
 
-        <Button variant="contained" disabled={!id || !folder} type="submit">
+        <Button variant="contained" disabled={!id || !folderName} type="submit">
           Save Tweet
         </Button>
       </FormControl>
