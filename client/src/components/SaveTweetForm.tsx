@@ -11,7 +11,18 @@ const SaveTweetForm = () => {
   const [folderName, setFolderName] = useState("");
   const saveTweet = async () => {
     try {
-      await axios.post(SAVE_TWEET_PATH, { id, folder: folderName });
+      const { data } = await axios.post(SAVE_TWEET_PATH, {
+        id,
+        folder: folderName,
+      });
+      const folderToUpdate = folders.find(
+        (folder) => folder.name === folderName
+      );
+      const foldersTweets = folderToUpdate["tweets"];
+      setFolders([
+        { ...folderToUpdate, tweets: [data, ...foldersTweets] },
+        ...folders.filter((folder) => folder.name !== folderName),
+      ]);
       setId("");
       setFolderName("");
     } catch {

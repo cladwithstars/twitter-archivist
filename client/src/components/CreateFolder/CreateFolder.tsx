@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Modal,
   Button,
@@ -7,6 +7,8 @@ import {
   FormControl,
   TextField,
 } from "@mui/material";
+
+import { FolderContext } from "../../context/FolderContext";
 
 import { CREATE_FOLDER_PATH, COLOURS } from "../../shared/constants";
 
@@ -25,6 +27,7 @@ const style = {
 };
 
 const CreateFolder = () => {
+  const [folders, setFolders] = useContext(FolderContext);
   const [open, setOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
 
@@ -33,7 +36,10 @@ const CreateFolder = () => {
 
   const createFolder = async () => {
     try {
-      await axios.post(CREATE_FOLDER_PATH, { name: folderName });
+      const { data } = await axios.post(CREATE_FOLDER_PATH, {
+        name: folderName,
+      });
+      setFolders([data, ...folders]);
       setOpen(false);
       setFolderName("");
     } catch {
@@ -41,7 +47,7 @@ const CreateFolder = () => {
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     createFolder();
   };
@@ -66,7 +72,6 @@ const CreateFolder = () => {
                 padding: 2,
                 paddingLeft: 0,
                 borderRadius: 2,
-                // borderColor: "primary.main",
                 width: "100%",
               }}
             >

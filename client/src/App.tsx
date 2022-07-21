@@ -6,7 +6,7 @@ import { FolderContext } from "./context/FolderContext";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 function App() {
-  const [folders, setFolders] = useContext(FolderContext);
+  const [folders] = useContext(FolderContext);
   return (
     <BrowserRouter>
       <div className="App">

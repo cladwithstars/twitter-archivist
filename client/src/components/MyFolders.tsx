@@ -3,7 +3,7 @@ import { FolderContext } from "../context/FolderContext";
 import { Link } from "react-router-dom";
 
 const MyFolders = () => {
-  const [folders, setFolders] = useContext(FolderContext);
+  const [folders] = useContext(FolderContext);
   return (
     <div>
       <h2>MyFolders</h2>
