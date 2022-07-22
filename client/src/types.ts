@@ -8,5 +8,9 @@ export interface Tweet {
   url: string;
   username: string;
   text: string;
-  id: string;
+  id?: string;
+  _id?: string;
+  displayPhoto?: string;
+  displayName?: string;
+  datePosted?: string;
 }

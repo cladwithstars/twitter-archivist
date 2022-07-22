@@ -13,6 +13,12 @@ const TweetSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  datePosted: {
+    type: String,
+  },
+  profileImg: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now(),

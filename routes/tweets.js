@@ -18,12 +18,16 @@ router.post("/saveTweet", async (req, res) => {
   const { id, folder } = req.body;
   try {
     const data = await client.v1.singleTweet(id);
-    const { full_text, user } = data;
-    const { screen_name } = user;
+    console.log(data);
+    const { full_text, user, created_at } = data;
+    const { screen_name, name, profile_image_url } = user;
     const newTweet = new Tweet({
       text: full_text,
       url: screen_name ? `https://twitter.com/${screen_name}/status/${id}` : "",
       username: screen_name || "",
+      displayName: name,
+      datePosted: created_at,
+      profileImg: profile_image_url,
     });
 
     const ourFolder = await Folder.find({ name: folder });
