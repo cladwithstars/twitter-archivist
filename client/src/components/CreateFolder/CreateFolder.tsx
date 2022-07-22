@@ -67,7 +67,12 @@ const CreateFolder = () => {
   };
   return (
     <>
-      <Button onClick={handleOpen} variant="contained" sx={{ width: "80%" }}>
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        fullWidth
+        sx={{ marginBottom: 2 }}
+      >
         Create Folder
       </Button>
       <Modal

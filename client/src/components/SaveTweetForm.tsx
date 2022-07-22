@@ -51,10 +51,12 @@ const SaveTweetForm = () => {
     <form onSubmit={handleSubmit}>
       <FormControl
         sx={{
-          padding: 2,
-          margin: "10px",
-          width: "80%",
+          paddingTop: 2,
+          paddingBottom: 2,
+          margin: "0 auto",
+          // width: "95%",
         }}
+        fullWidth
       >
         <TextField
           id="outlined-basic"

@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 // import { TweetList } from "./TweetList";
 import { FolderContext } from "../context/FolderContext";
-import Tweet from "./Tweet";
+import Tweet from "../components/Tweet";
+import { Grid } from "@mui/material";
 
-const Folder = ({ name }) => {
+const FolderPage = () => {
   const params = useParams();
   const folderName = params.name;
   const [folders] = useContext(FolderContext);
@@ -14,11 +15,15 @@ const Folder = ({ name }) => {
   return (
     <div>
       <h2>{params.folder}</h2>
-      {tweets.map(({ text, url, username }) => (
-        <Tweet key={url} text={text} url={url} username={username} />
-      ))}
+      <Grid container>
+        {tweets.map(({ text, url, username }) => (
+          <Grid item key={url} sx={{ minWidth: "300px" }}>
+            <Tweet text={text} url={url} username={username} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
 
-export default Folder;
+export default FolderPage;

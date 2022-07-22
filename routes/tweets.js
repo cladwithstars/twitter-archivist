@@ -29,17 +29,17 @@ router.post("/saveTweet", async (req, res) => {
     const ourFolder = await Folder.find({ name: folder });
     const tweet = await newTweet.save();
 
-    Folder.findOneAndUpdate(
-      { _id: ourFolder[0]._id },
-      { $push: { tweets: newTweet } },
-      function (error, success) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(success);
-        }
+    const filter = { _id: ourFolder[0]._id };
+    const update = {
+      $set: { date: Date.now() },
+      $push: { tweets: newTweet },
+    };
+
+    Folder.findOneAndUpdate(filter, update, function (error, success) {
+      if (error) {
+        console.log(error);
       }
-    );
+    });
 
     res.json(tweet);
   } catch {

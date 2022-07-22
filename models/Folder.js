@@ -11,7 +11,7 @@ const FolderSchema = mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    default: Date.now(), // keeps track of last time *modified* - not creation date
   },
 });
 

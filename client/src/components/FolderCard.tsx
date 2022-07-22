@@ -1,21 +1,32 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@mui/material";
+import FolderIcon from "@mui/icons-material/Folder";
 
-const Tweet = ({ text, url, username }) => {
+interface Props {
+  folderName: string;
+}
+
+const FolderCard: React.FC<Props> = ({ folderName }) => {
   return (
     <Card
       sx={{
         width: "80%",
         margin: "0 auto",
         marginBottom: "10px",
-        backgroundColor: "lightskyblue",
+        backgroundColor: "lightblue",
       }}
     >
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
-          {text}
+        <FolderIcon sx={{ color: "palegoldenrod" }} />
+        <Typography
+          variant="h5"
+          sx={{ fontSize: 14 }}
+          color="text.primary"
+          gutterBottom
+        >
+          {folderName}
         </Typography>
-        <hr style={{ color: "lightgrey" }} />
+        {/* <hr style={{ color: "lightgrey" }} />
         <Typography variant="h5" color="text.secondary" component="div">
           @{username}
         </Typography>
@@ -23,10 +34,10 @@ const Tweet = ({ text, url, username }) => {
           <a target="__blank" href={url}>
             {url}
           </a>
-        </Typography>
+        </Typography> */}
       </CardContent>
     </Card>
   );
 };
 
-export default Tweet;
+export default FolderCard;
