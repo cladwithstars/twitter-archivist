@@ -44,6 +44,7 @@ router.post("/saveTweet", async (req, res) => {
     res.json(tweet);
   } catch {
     console.error("could not save tweet");
+    res.status(500).send("Server Error - could not save tweet");
   }
 });
 

@@ -8,6 +8,9 @@ import { SAVE_TWEET_PATH } from "../shared/constants";
 const SaveTweetForm = () => {
   const [folders, setFolders] = useContext(FolderContext);
   const [id, setId] = useState("");
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [folderName, setFolderName] = useState("");
   const saveTweet = async () => {
     try {
@@ -25,14 +28,23 @@ const SaveTweetForm = () => {
       ]);
       setId("");
       setFolderName("");
+      setLoading(false);
     } catch {
-      console.error("could not save tweet");
+      setError(true);
+      setLoading(false);
     }
   };
   const handleFolderChange = (e) => setFolderName(e.target.value);
+  const handleInputChange = (e) => {
+    if (error) {
+      setError(false);
+    }
+    setId(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     saveTweet();
   };
   return (
@@ -51,7 +63,12 @@ const SaveTweetForm = () => {
           required
           value={id}
           sx={{ paddingBottom: 2 }}
-          onChange={(e) => setId(e.target.value)}
+          onChange={handleInputChange}
+          error={error}
+          helperText={
+            error &&
+            "Could not save tweet. Make sure the id is a valid tweet id, or try again later"
+          }
         />
 
         <FormControl sx={{ paddingBottom: 2 }}>
@@ -60,7 +77,7 @@ const SaveTweetForm = () => {
             value={folderName}
             select
             required
-            label="Select Folder"
+            label="Select Folder to Save Tweet to"
             onChange={handleFolderChange}
           >
             {folders.map(({ name }) => (
@@ -71,7 +88,11 @@ const SaveTweetForm = () => {
           </TextField>
         </FormControl>
 
-        <Button variant="contained" disabled={!id || !folderName} type="submit">
+        <Button
+          variant="contained"
+          disabled={!id || !folderName || loading}
+          type="submit"
+        >
           Save Tweet
         </Button>
       </FormControl>

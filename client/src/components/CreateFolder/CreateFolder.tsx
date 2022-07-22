@@ -28,6 +28,8 @@ const style = {
 
 const CreateFolder = () => {
   const [folders, setFolders] = useContext(FolderContext);
+  const folderNames = folders.map((folder) => folder.name);
+  const [folderAlreadyExists, setFolderAlreadyExists] = useState(false);
   const [open, setOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
 
@@ -47,8 +49,20 @@ const CreateFolder = () => {
     }
   };
 
+  const handleInputChange = (e) => {
+    if (folderAlreadyExists) {
+      // clear error when user starts typing again
+      setFolderAlreadyExists(false);
+    }
+    setFolderName(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (folderNames.includes(folderName)) {
+      setFolderAlreadyExists(true);
+      return;
+    }
     createFolder();
   };
   return (
@@ -82,9 +96,13 @@ const CreateFolder = () => {
                 value={folderName}
                 fullWidth
                 sx={{ paddingBottom: 2 }}
-                onChange={(e) => setFolderName(e.target.value)}
+                error={folderAlreadyExists}
+                helperText={
+                  folderAlreadyExists &&
+                  "Folder by that name already exists, use a different name"
+                }
+                onChange={handleInputChange}
               />
-
               <Button
                 variant="contained"
                 fullWidth
