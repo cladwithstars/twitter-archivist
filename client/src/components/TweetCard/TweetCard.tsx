@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardContent,
@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import "./styles.css";
+import { FolderContext } from "../../context/FolderContext";
 import { DELETE_TWEET_PATH } from "../../shared/constants";
 import axios from "axios";
 import { Tweet } from "../../types";
@@ -17,18 +18,23 @@ interface Props {
 }
 
 const TweetCard: React.FC<Props> = ({ tweet }) => {
-  console.log("tweet is: ", tweet);
+  const [folders, setFolders] = useContext(FolderContext);
   const params = useParams();
   const folderName = params.name;
   const { url, text, username, displayPhoto, datePosted, displayName, _id } =
     tweet;
 
+  const updateContext = () => {};
+
   const deleteTweet = async () => {
-    const path = `${DELETE_TWEET_PATH}/${folderName}/${_id}`;
-    console.log("path: ", path);
-    await axios.delete(path);
+    try {
+      await axios.delete(`${DELETE_TWEET_PATH}/${folderName}/${_id}`);
+    } catch {
+      console.error("could not delete folder");
+    }
   };
-  const handleDelete = (e) => {
+
+  const handleDelete = () => {
     deleteTweet();
   };
   return (

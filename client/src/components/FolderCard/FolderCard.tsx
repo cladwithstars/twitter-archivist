@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardContent,
@@ -7,6 +7,7 @@ import {
   Button,
 } from "@mui/material";
 import { DELETE_FOLDER_PATH } from "../../shared/constants";
+import { FolderContext } from "../../context/FolderContext";
 import axios from "axios";
 import FolderIcon from "@mui/icons-material/Folder";
 
@@ -15,9 +16,17 @@ interface Props {
 }
 
 const FolderCard: React.FC<Props> = ({ folderName }) => {
+  const [folders, setFolders] = useContext(FolderContext);
+  const updateContext = () => {
+    const updatedFolders = folders.filter(
+      (folder) => folder.name !== folderName
+    );
+    setFolders(updatedFolders);
+  };
   const handleDelete = async () => {
     try {
       await axios.delete(`${DELETE_FOLDER_PATH}/${folderName}`);
+      updateContext();
     } catch {
       console.error("delete folder failed");
     }
