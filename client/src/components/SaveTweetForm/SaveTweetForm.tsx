@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { TextField, Button, FormControl, MenuItem } from "@mui/material";
 import axios from "axios";
-import { FolderContext } from "../context/FolderContext";
+import { FolderContext } from "../../context/FolderContext";
 
-import { SAVE_TWEET_PATH } from "../shared/constants";
+import { SAVE_TWEET_PATH } from "../../shared/constants";
 
 const SaveTweetForm = () => {
   const [folders, setFolders] = useContext(FolderContext);
@@ -79,6 +79,7 @@ const SaveTweetForm = () => {
             value={folderName}
             select
             required
+            disabled={!folders?.length}
             label="Select Folder to Save Tweet to"
             onChange={handleFolderChange}
           >

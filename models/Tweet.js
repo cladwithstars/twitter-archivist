@@ -16,6 +16,9 @@ const TweetSchema = mongoose.Schema({
   datePosted: {
     type: String,
   },
+  displayName: {
+    type: String,
+  },
   profileImg: {
     type: String,
   },

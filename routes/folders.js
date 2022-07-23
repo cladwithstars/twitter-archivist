@@ -30,4 +30,19 @@ router.get("/getFolders", async (req, res) => {
   }
 });
 
+router.delete("/:name", async (req, res) => {
+  try {
+    let folder = await Folder.find({ name: req.params.name });
+
+    if (!folder) return res.status(404).json({ msg: "Folder not found" });
+
+    await Folder.deleteOne({ name: req.params.name });
+
+    res.json({ msg: "Folder removed" });
+  } catch (err) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

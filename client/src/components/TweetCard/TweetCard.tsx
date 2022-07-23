@@ -1,6 +1,15 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActions,
+  Button,
+} from "@mui/material";
+import { useParams } from "react-router-dom";
 import "./styles.css";
+import { DELETE_TWEET_PATH } from "../../shared/constants";
+import axios from "axios";
 import { Tweet } from "../../types";
 
 interface Props {
@@ -8,7 +17,20 @@ interface Props {
 }
 
 const TweetCard: React.FC<Props> = ({ tweet }) => {
-  const { url, text, username, displayPhoto, datePosted, displayName } = tweet;
+  console.log("tweet is: ", tweet);
+  const params = useParams();
+  const folderName = params.name;
+  const { url, text, username, displayPhoto, datePosted, displayName, _id } =
+    tweet;
+
+  const deleteTweet = async () => {
+    const path = `${DELETE_TWEET_PATH}/${folderName}/${_id}`;
+    console.log("path: ", path);
+    await axios.delete(path);
+  };
+  const handleDelete = (e) => {
+    deleteTweet();
+  };
   return (
     <Card
       sx={{
@@ -19,10 +41,15 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
       }}
       className="tweet"
     >
+      <CardActions>
+        <Button size="small" onClick={handleDelete}>
+          Delete
+        </Button>
+      </CardActions>
       <CardContent>
         <Typography color="text.primary" className="name" component="span">
           {" "}
-          {displayName || "No Display Name"}
+          {displayName || ""}
         </Typography>
         <Typography color="text.secondary" className="handle" component="span">
           @{username}

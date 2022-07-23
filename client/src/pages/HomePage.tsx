@@ -1,6 +1,6 @@
 import React from "react";
-import SaveTweetForm from "../components/SaveTweetForm";
-import MyFolders from "../components/MyFolders";
+import SaveTweetForm from "../components/SaveTweetForm/SaveTweetForm";
+import MyFolders from "../components/MyFolders/MyFolders";
 import CreateFolder from "../components/CreateFolder/CreateFolder";
 import { Container } from "@mui/material";
 

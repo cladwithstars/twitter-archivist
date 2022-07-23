@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import FolderPage from "./pages/FolderPage";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Auth/Login";
 import { FolderContext } from "./context/FolderContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

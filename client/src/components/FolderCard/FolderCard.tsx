@@ -1,5 +1,13 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActions,
+  Button,
+} from "@mui/material";
+import { DELETE_FOLDER_PATH } from "../../shared/constants";
+import axios from "axios";
 import FolderIcon from "@mui/icons-material/Folder";
 
 interface Props {
@@ -7,6 +15,18 @@ interface Props {
 }
 
 const FolderCard: React.FC<Props> = ({ folderName }) => {
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${DELETE_FOLDER_PATH}/${folderName}`);
+    } catch {
+      console.error("delete folder failed");
+    }
+  };
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleDelete();
+  };
   return (
     <Card
       sx={{
@@ -16,6 +36,11 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
         backgroundColor: "lightblue",
       }}
     >
+      <CardActions>
+        <Button size="small" onClick={handleClick}>
+          Delete
+        </Button>
+      </CardActions>
       <CardContent>
         <FolderIcon sx={{ color: "palegoldenrod" }} />
         <Typography
@@ -26,15 +51,6 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
         >
           {folderName}
         </Typography>
-        {/* <hr style={{ color: "lightgrey" }} />
-        <Typography variant="h5" color="text.secondary" component="div">
-          @{username}
-        </Typography>
-        <Typography variant="body2">
-          <a target="__blank" href={url}>
-            {url}
-          </a>
-        </Typography> */}
       </CardContent>
     </Card>
   );

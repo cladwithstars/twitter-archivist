@@ -16,7 +16,6 @@ export const FolderProvider = (props) => {
     }
   };
   useEffect(() => {
-    console.log("fetching folders");
     getFolders();
   }, []);
   return (

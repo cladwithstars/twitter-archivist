@@ -22,7 +22,7 @@ router.post("/saveTweet", async (req, res) => {
     const { full_text, user, created_at } = data;
     const { screen_name, name, profile_image_url } = user;
     const newTweet = new Tweet({
-      text: full_text,
+      text: full_text || "",
       url: screen_name ? `https://twitter.com/${screen_name}/status/${id}` : "",
       username: screen_name || "",
       displayName: name,
@@ -49,6 +49,35 @@ router.post("/saveTweet", async (req, res) => {
   } catch {
     console.error("could not save tweet");
     res.status(500).send("Server Error - could not save tweet");
+  }
+});
+
+router.delete("/:folderName/:tweetId", async (req, res) => {
+  console.log("req: ", req.params);
+  try {
+    let folder = await Folder.find({ name: req.params.folderName });
+
+    if (!folder) return res.status(404).json({ msg: "Folder not found" });
+
+    const filter = { _id: folder[0]._id };
+    const update = {
+      $set: { date: Date.now() },
+      $set: {
+        tweets: folder[0]["tweets"].filter(
+          (tweet) => tweet._id.toString() !== req.params.tweetId
+        ),
+      },
+    };
+    Folder.findOneAndUpdate(filter, update, function (error, success) {
+      if (error) {
+        console.log(error);
+      }
+    });
+
+    res.json({ msg: "Folder removed" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
