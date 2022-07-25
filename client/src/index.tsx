@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import AuthState from "./context/auth/AuthState";
 import { FolderProvider } from "./context/FolderContext";
 
 const root = ReactDOM.createRoot(
@@ -9,8 +10,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <FolderProvider>
-      <App />
-    </FolderProvider>
+    <AuthState>
+      <FolderProvider>
+        <App />
+      </FolderProvider>
+    </AuthState>
   </React.StrictMode>
 );

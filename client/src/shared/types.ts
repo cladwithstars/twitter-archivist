@@ -1,7 +1,8 @@
 export interface Folder {
   tweets: Array<Tweet>;
   name: string;
-  id: string;
+  id?: string;
+  _id: string;
 }
 
 export interface Tweet {

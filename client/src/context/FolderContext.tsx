@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { GET_FOLDERS_PATH } from "../shared/constants";
-import type { Folder } from "../types";
+import type { Folder } from "../shared/types";
 
 export const FolderContext = createContext([] as any);
 

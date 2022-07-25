@@ -11,7 +11,7 @@ import "./styles.css";
 import { FolderContext } from "../../context/FolderContext";
 import { DELETE_TWEET_PATH } from "../../shared/constants";
 import axios from "axios";
-import { Tweet } from "../../types";
+import { Tweet } from "../../shared/types";
 
 interface Props {
   tweet: Tweet;

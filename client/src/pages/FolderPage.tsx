@@ -5,7 +5,7 @@ import { FolderContext } from "../context/FolderContext";
 import TweetCard from "../components/TweetCard/TweetCard";
 import { Grid } from "@mui/material";
 
-import { Folder, Tweet } from "../types";
+import { Folder, Tweet } from "../shared/types";
 
 const FolderPage = () => {
   const params = useParams();

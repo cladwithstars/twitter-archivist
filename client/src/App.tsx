@@ -4,22 +4,39 @@ import HomePage from "./pages/HomePage";
 import FolderPage from "./pages/FolderPage";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 import { FolderContext } from "./context/FolderContext";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AuthContext from "./context/auth/authContext";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated, loading } = authContext;
+  console.log("isAuthenticated: ", isAuthenticated);
+  console.log("isLoading: ", loading);
   const [folders] = useContext(FolderContext);
   return (
     <BrowserRouter>
       <div className="App">
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={
+              !isAuthenticated && !loading ? (
+                <Navigate to="/login" />
+              ) : (
+                <HomePage />
+              )
+            }
+          />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           {folders.map(({ name }) => (
             <Route key={name} path="folder/:name" element={<FolderPage />} />
           ))}
         </Routes>
-        <Login />
+        <Register />
       </div>
     </BrowserRouter>
   );

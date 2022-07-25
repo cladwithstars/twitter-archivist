@@ -53,7 +53,6 @@ router.post("/saveTweet", async (req, res) => {
 });
 
 router.delete("/:folderName/:tweetId", async (req, res) => {
-  console.log("req: ", req.params);
   try {
     let folder = await Folder.find({ name: req.params.folderName });
 

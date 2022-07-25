@@ -13,6 +13,8 @@ connectDB();
 app.use(express.json({ extended: false })); //now we can accept body data
 
 //Define Routes
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/users", require("./routes/users"));
 app.use("/api/folders", require("./routes/folders"));
 app.use("/api/tweets", require("./routes/tweets"));
 
