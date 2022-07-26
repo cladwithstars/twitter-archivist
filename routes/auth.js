@@ -14,7 +14,7 @@ const User = require("../models/User");
 //everytime we need to protect a route, bring in the middleware
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password"); //don't want to rtrn password
+    const user = await User.findById(req.user.id).select("-password"); //don't want to retrn password
     res.json(user);
   } catch (error) {
     console.log(error.message);
@@ -34,7 +34,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() }); //gives us an array of errors
+      return res.status(400).json({ errors: errors.array() });
     }
 
     const { email, password } = req.body;

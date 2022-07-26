@@ -63,6 +63,7 @@ const AuthState = (props) => {
     };
     try {
       const res = await axios.post(REGISTER_PATH, formData, config);
+      localStorage.setItem("token", res.data.token);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
@@ -85,6 +86,7 @@ const AuthState = (props) => {
     };
     try {
       const res = await axios.post(LOGIN_PATH, formData, config);
+      localStorage.setItem("token", res.data.token);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
