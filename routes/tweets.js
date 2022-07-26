@@ -18,7 +18,6 @@ router.post("/saveTweet", async (req, res) => {
   const { id, folder } = req.body;
   try {
     const data = await client.v1.singleTweet(id);
-    console.log(data);
     const { full_text, user, created_at } = data;
     const { screen_name, name, profile_image_url } = user;
     const newTweet = new Tweet({

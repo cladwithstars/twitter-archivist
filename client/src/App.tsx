@@ -8,13 +8,17 @@ import Register from "./components/Auth/Register";
 import { FolderContext } from "./context/FolderContext";
 import AuthContext from "./context/auth/authContext";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import setAuthToken from "./utils/setAuthToken";
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, loading } = authContext;
-  console.log("isAuthenticated: ", isAuthenticated);
-  console.log("isLoading: ", loading);
   const [folders] = useContext(FolderContext);
+
   return (
     <BrowserRouter>
       <div className="App">

@@ -10,10 +10,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <AuthState>
-      <FolderProvider>
+    <FolderProvider>
+      <AuthState>
         <App />
-      </FolderProvider>
-    </AuthState>
+      </AuthState>
+    </FolderProvider>
   </React.StrictMode>
 );

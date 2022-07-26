@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../context/auth/authContext";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,8 +15,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
 
 const Navbar = () => {
+  const authContext = useContext(AuthContext);
+  const { logout } = authContext;
   const pages = ["About"];
-  const settings = ["Logout"];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -36,6 +38,10 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -154,11 +160,7 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <Button onClick={handleLogout}>Logout</Button>
             </Menu>
           </Box>
         </Toolbar>

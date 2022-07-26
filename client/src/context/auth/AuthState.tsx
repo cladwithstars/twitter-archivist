@@ -30,6 +30,7 @@ import {
 // }
 
 const AuthState = (props) => {
+  // console.log(props);
   const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
@@ -55,7 +56,6 @@ const AuthState = (props) => {
   };
   //Register User
   const register = async (formData) => {
-    console.log("calling register");
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +99,10 @@ const AuthState = (props) => {
     }
   };
   //Logout
-  const logout = () => dispatch({ type: LOGOUT });
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch({ type: LOGOUT });
+  };
   // Clear Errors
 
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });

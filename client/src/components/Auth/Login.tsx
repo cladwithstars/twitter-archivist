@@ -1,11 +1,30 @@
 import { TextField, Button } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
+import AuthContext from "../../context/auth/authContext";
 
-const Login = () => {
+const Login = (props) => {
+  const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
+  const { login, error, clearErrors, isAuthenticated } = authContext;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+    if (error === "Invalid Credentials") {
+      clearErrors();
+    }
+  }, [error, isAuthenticated, clearErrors, navigate]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
+    login({
+      email,
+      password,
+    });
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -13,11 +32,19 @@ const Login = () => {
         label="Email"
         id="email"
         type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         sx={{ paddingBottom: 2 }}
       />
-      <TextField label="Password" id="password" type="password" />
+      <TextField
+        label="Password"
+        id="password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <Button
-        type="button"
+        type="submit"
         color="primary"
         sx={{ marginTop: 2 }}
         variant="contained"

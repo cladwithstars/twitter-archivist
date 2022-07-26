@@ -1,18 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import AuthContext from "../../context/auth/authContext";
 import "./styles.css";
 
 const Register = () => {
+  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const { register, error, clearErrors, isAuthenticated } = authContext;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+    if (error === "User already exists") {
+      clearErrors();
+    }
+  }, [error, isAuthenticated, clearErrors, navigate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("register called");
     register({ email, password });
   };
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <TextField
