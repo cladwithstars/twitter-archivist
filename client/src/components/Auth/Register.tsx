@@ -50,6 +50,15 @@ const Register = () => {
       >
         Register
       </Button>
+      <Button
+        type="button"
+        color="primary"
+        sx={{ marginTop: 2 }}
+        variant="contained"
+        onClick={(e) => navigate("/login")}
+      >
+        Login
+      </Button>
     </form>
   );
 };

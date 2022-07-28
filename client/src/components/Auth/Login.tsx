@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import AuthContext from "../../context/auth/authContext";
 
-const Login = (props) => {
+const Login = () => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const { login, error, clearErrors, isAuthenticated } = authContext;
@@ -50,6 +50,15 @@ const Login = (props) => {
         variant="contained"
       >
         Log in
+      </Button>
+      <Button
+        type="button"
+        color="primary"
+        sx={{ marginTop: 2 }}
+        variant="contained"
+        onClick={(e) => navigate("/register")}
+      >
+        Register
       </Button>
     </form>
   );

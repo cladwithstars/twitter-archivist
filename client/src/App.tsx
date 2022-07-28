@@ -40,7 +40,6 @@ function App() {
             <Route key={name} path="folder/:name" element={<FolderPage />} />
           ))}
         </Routes>
-        <Register />
       </div>
     </BrowserRouter>
   );

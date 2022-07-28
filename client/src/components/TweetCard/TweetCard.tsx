@@ -21,14 +21,29 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   const [folders, setFolders] = useContext(FolderContext);
   const params = useParams();
   const folderName = params.name;
+  const folderId = folderName ? folders[folderName]?._id : null;
   const { url, text, username, displayPhoto, datePosted, displayName, _id } =
     tweet;
 
   const updateContext = () => {};
 
+  const updateFolder = () => {};
+
   const deleteTweet = async () => {
     try {
       await axios.delete(`${DELETE_TWEET_PATH}/${folderName}/${_id}`);
+      if (folderName && folderId) {
+        console.log("updating folder context");
+        let folderToUpdate = folders[folderName];
+        folderToUpdate = {
+          ...folderToUpdate,
+          tweets: folderToUpdate.tweets.filter((tweet) => tweet._id !== _id),
+        };
+        setFolders([
+          folderToUpdate,
+          folders.filter((folder) => folder._id !== folderId),
+        ]);
+      }
     } catch {
       console.error("could not delete folder");
     }

@@ -4,6 +4,8 @@ import authReducer from "./authReducer";
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 
+import { Credentials, AuthenticationState } from "../../shared/types";
+
 import {
   REGISTER_PATH,
   LOAD_USER_PATH,
@@ -21,24 +23,15 @@ import {
   CLEAR_ERRORS,
 } from "./constants";
 
-// interface authState {
-//   token: string | null;
-//   isAuthenticated: boolean | null;
-//   loading: boolean;
-//   error: any;
-//   user: any;
-// }
+const initialState: AuthenticationState = {
+  token: localStorage.getItem("token"),
+  isAuthenticated: null,
+  loading: true,
+  error: null,
+  user: null,
+};
 
-const AuthState = (props) => {
-  // console.log(props);
-  const initialState = {
-    token: localStorage.getItem("token"),
-    isAuthenticated: null,
-    loading: true,
-    error: null,
-    user: null,
-  };
-
+const AuthState = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const loadUser = async () => {
@@ -47,15 +40,13 @@ const AuthState = (props) => {
     }
     try {
       const res = await axios.get(LOAD_USER_PATH);
-
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
-      //invalid credentials
       dispatch({ type: AUTH_ERROR });
     }
   };
-  //Register User
-  const register = async (formData) => {
+
+  const register = async (formData: Credentials) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -77,8 +68,8 @@ const AuthState = (props) => {
       });
     }
   };
-  //Login User
-  const login = async (formData) => {
+
+  const login = async (formData: Credentials) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -100,12 +91,11 @@ const AuthState = (props) => {
       });
     }
   };
-  //Logout
+
   const logout = () => {
     localStorage.removeItem("token");
     dispatch({ type: LOGOUT });
   };
-  // Clear Errors
 
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -124,7 +114,7 @@ const AuthState = (props) => {
         logout,
       }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
 };

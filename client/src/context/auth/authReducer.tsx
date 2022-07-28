@@ -9,7 +9,14 @@ import {
   CLEAR_ERRORS,
 } from "./constants";
 
-const authReducer = (state, action) => {
+import { AuthenticationState } from "../../shared/types";
+
+interface Action {
+  type: string;
+  payload?: any;
+}
+
+const authReducer = (state: AuthenticationState, action: Action) => {
   switch (action.type) {
     case USER_LOADED:
       return {
