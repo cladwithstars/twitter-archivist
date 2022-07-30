@@ -5,7 +5,8 @@ require("dotenv").config();
 
 const Folder = require("../models/Folder");
 
-router.post("/createFolder", async (req, res) => {
+// create folder
+router.post("/", async (req, res) => {
   const { name, userId } = req.body;
   console.log("userId: ", userId);
   try {
@@ -22,7 +23,7 @@ router.post("/createFolder", async (req, res) => {
   }
 });
 
-router.get("/getFolders/:userId", async (req, res) => {
+router.get("/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
     const folders = await Folder.find({ userId }).sort({ date: -1 });

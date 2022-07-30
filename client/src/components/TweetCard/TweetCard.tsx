@@ -9,7 +9,7 @@ import {
 import { useParams } from "react-router-dom";
 import "./styles.css";
 import { FolderContext } from "../../context/FolderContext";
-import { DELETE_TWEET_PATH } from "../../shared/constants";
+import { TWEETS_PATH } from "../../shared/constants";
 import axios from "axios";
 import { Tweet } from "../../shared/types";
 
@@ -31,7 +31,7 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
 
   const deleteTweet = async () => {
     try {
-      await axios.delete(`${DELETE_TWEET_PATH}/${folderName}/${_id}`);
+      await axios.delete(`${TWEETS_PATH}/${folderName}/${_id}`);
       if (folderName && folderId) {
         let folderToUpdate = folders[folderName];
         folderToUpdate = {

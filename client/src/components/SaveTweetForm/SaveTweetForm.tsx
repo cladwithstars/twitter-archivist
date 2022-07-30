@@ -3,7 +3,7 @@ import { TextField, Button, FormControl, MenuItem } from "@mui/material";
 import axios from "axios";
 import { FolderContext } from "../../context/FolderContext";
 
-import { SAVE_TWEET_PATH } from "../../shared/constants";
+import { TWEETS_PATH } from "../../shared/constants";
 
 const SaveTweetForm = () => {
   const [folders, setFolders] = useContext(FolderContext);
@@ -14,7 +14,7 @@ const SaveTweetForm = () => {
   const [folderName, setFolderName] = useState("");
   const saveTweet = async () => {
     try {
-      const { data } = await axios.post(SAVE_TWEET_PATH, {
+      const { data } = await axios.post(TWEETS_PATH, {
         id,
         folder: folderName,
       });

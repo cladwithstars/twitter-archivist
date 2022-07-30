@@ -6,11 +6,7 @@ import setAuthToken from "../../utils/setAuthToken";
 
 import { Credentials, AuthenticationState } from "../../shared/types";
 
-import {
-  REGISTER_PATH,
-  LOAD_USER_PATH,
-  LOGIN_PATH,
-} from "../../shared/constants";
+import { USERS_PATH, AUTH_PATH } from "../../shared/constants";
 
 import {
   REGISTER_SUCCESS,
@@ -39,7 +35,7 @@ const AuthState = ({ children }) => {
       setAuthToken(localStorage.token);
     }
     try {
-      const res = await axios.get(LOAD_USER_PATH);
+      const res = await axios.get(AUTH_PATH);
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
       dispatch({ type: AUTH_ERROR });
@@ -53,8 +49,7 @@ const AuthState = ({ children }) => {
       },
     };
     try {
-      const res = await axios.post(REGISTER_PATH, formData, config);
-      console.log("res.data: ", res.data);
+      const res = await axios.post(USERS_PATH, formData, config);
       localStorage.setItem("token", res.data.token);
       dispatch({
         type: REGISTER_SUCCESS,
@@ -79,7 +74,7 @@ const AuthState = ({ children }) => {
       },
     };
     try {
-      const res = await axios.post(LOGIN_PATH, formData, config);
+      const res = await axios.post(AUTH_PATH, formData, config);
       localStorage.setItem("token", res.data.token);
       dispatch({
         type: LOGIN_SUCCESS,

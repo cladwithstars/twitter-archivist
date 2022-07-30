@@ -14,7 +14,7 @@ const client = new TwitterApi({
 const Folder = require("../models/Folder");
 const Tweet = require("../models/Tweet");
 
-router.post("/saveTweet", async (req, res) => {
+router.post("/", async (req, res) => {
   const { id, folder } = req.body;
   try {
     const data = await client.v1.singleTweet(id);

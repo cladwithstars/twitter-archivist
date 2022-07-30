@@ -4,21 +4,19 @@ const path = require("path");
 const app = express();
 
 var cors = require("cors");
-app.use(cors()); // <---- use cors middleware
+app.use(cors());
 
-//Connect Database
 connectDB();
 
-//Init Middleware
-app.use(express.json({ extended: false })); //now we can accept body data
+// middleware
+app.use(express.json({ extended: false }));
 
-//Define Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/users", require("./routes/users"));
 app.use("/api/folders", require("./routes/folders"));
 app.use("/api/tweets", require("./routes/tweets"));
 
-//Serve static assets in production
+// serve static assets in production
 if (process.env.NODE_ENV === "production") {
   app.get("", (req, res) => {
     res.sendFile(__dirname + "/client/build/index.html");

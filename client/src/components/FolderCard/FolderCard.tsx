@@ -6,7 +6,7 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
-import { DELETE_FOLDER_PATH } from "../../shared/constants";
+import { FOLDERS_PATH } from "../../shared/constants";
 import { FolderContext } from "../../context/FolderContext";
 import axios from "axios";
 import FolderIcon from "@mui/icons-material/Folder";
@@ -25,7 +25,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
   };
   const handleDelete = async () => {
     try {
-      await axios.delete(`${DELETE_FOLDER_PATH}/${folderName}`);
+      await axios.delete(`${FOLDERS_PATH}/${folderName}`);
       updateContext();
     } catch {
       console.error("delete folder failed");

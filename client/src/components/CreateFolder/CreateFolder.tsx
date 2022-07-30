@@ -10,7 +10,7 @@ import {
 
 import { FolderContext } from "../../context/FolderContext";
 
-import { CREATE_FOLDER_PATH, COLOURS } from "../../shared/constants";
+import { FOLDERS_PATH, COLOURS } from "../../shared/constants";
 
 import AuthContext from "../../context/auth/authContext";
 
@@ -42,7 +42,7 @@ const CreateFolder = () => {
 
   const createFolder = async () => {
     try {
-      const { data } = await axios.post(CREATE_FOLDER_PATH, {
+      const { data } = await axios.post(FOLDERS_PATH, {
         name: folderName,
         userId: authContext.user?._id,
       });
