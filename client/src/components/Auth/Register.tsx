@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Typography } from "@mui/material";
 import AuthContext from "../../context/auth/authContext";
 import "./styles.css";
 
@@ -10,13 +10,15 @@ const Register = () => {
   const { register, error, clearErrors, isAuthenticated } = authContext;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registerError, setRegisterError] = useState(false);
 
   useEffect(() => {
+    console.log("error: ", error);
     if (isAuthenticated) {
       navigate("/");
     }
-    if (error === "User already exists") {
-      clearErrors();
+    if (error) {
+      setRegisterError(true);
     }
   }, [error, isAuthenticated, clearErrors, navigate]);
 
@@ -30,16 +32,26 @@ const Register = () => {
       <TextField
         label="Email"
         id="email"
-        type="text"
+        type="email"
+        required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         sx={{ paddingBottom: 2 }}
+        inputProps={{ maxLength: 40 }}
+        error={registerError}
+        helperText={
+          registerError &&
+          "Must register with a valid email and password of 6 or more characters"
+        }
       />
       <TextField
         label="Password"
         id="password"
         type="password"
+        required
         onChange={(e) => setPassword(e.target.value)}
+        error={registerError}
+        inputProps={{ minLength: 6, maxLength: 40 }}
       />
       <Button
         type="submit"
@@ -50,15 +62,29 @@ const Register = () => {
       >
         Register
       </Button>
-      <Button
-        type="button"
-        color="primary"
-        sx={{ marginTop: 2 }}
-        variant="contained"
-        onClick={(e) => navigate("/login")}
-      >
-        Login
-      </Button>
+      <p>
+        Already have an account?{" "}
+        <Typography
+          variant="h6"
+          noWrap
+          component="button"
+          onClick={() => navigate("/login")}
+          sx={{
+            display: "flex",
+            fontFamily: "monospace",
+            fontWeight: 700,
+            letterSpacing: ".3rem",
+            color: "purple",
+            textDecoration: "none",
+            backgroundColor: "transparent",
+            cursor: "pointer",
+            border: "none",
+            margin: "0 auto",
+          }}
+        >
+          Login
+        </Typography>
+      </p>
     </form>
   );
 };

@@ -12,7 +12,6 @@ export const FolderProvider = (props) => {
 
   const [folders, setFolders] = useState<Array<Folder>>([]);
   const getFolders = async () => {
-    console.log("authCotext.user id in folderProvider: ", user?._id);
     try {
       const { data } = await axios.get(`${GET_FOLDERS_PATH}/${user?._id}`);
       setFolders(data);

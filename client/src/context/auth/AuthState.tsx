@@ -54,6 +54,7 @@ const AuthState = ({ children }) => {
     };
     try {
       const res = await axios.post(REGISTER_PATH, formData, config);
+      console.log("res.data: ", res.data);
       localStorage.setItem("token", res.data.token);
       dispatch({
         type: REGISTER_SUCCESS,
@@ -61,7 +62,9 @@ const AuthState = ({ children }) => {
       });
 
       loadUser();
-    } catch (err) {
+    } catch (err: any) {
+      // console.log("err: ", err.response.data.errors);
+
       dispatch({
         type: REGISTER_FAIL,
         payload: "register fail",
@@ -87,7 +90,7 @@ const AuthState = ({ children }) => {
     } catch (err) {
       dispatch({
         type: LOGIN_FAIL,
-        payload: "register fail",
+        payload: "login fail",
       });
     }
   };
