@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-// import { TweetList } from "./TweetList";
 import { FolderContext } from "../context/FolderContext";
 import TweetCard from "../components/TweetCard/TweetCard";
 import { Grid } from "@mui/material";

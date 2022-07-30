@@ -6,11 +6,13 @@ require("dotenv").config();
 const Folder = require("../models/Folder");
 
 router.post("/createFolder", async (req, res) => {
-  const { name } = req.body;
+  const { name, userId } = req.body;
+  console.log("userId: ", userId);
   try {
     const newFolder = new Folder({
       name,
       tweets: [],
+      userId,
     });
     const folder = await newFolder.save();
     res.json(folder);
@@ -20,9 +22,10 @@ router.post("/createFolder", async (req, res) => {
   }
 });
 
-router.get("/getFolders", async (req, res) => {
+router.get("/getFolders/:userId", async (req, res) => {
+  const { userId } = req.params;
   try {
-    const folders = await Folder.find().sort({ date: -1 });
+    const folders = await Folder.find({ userId }).sort({ date: -1 });
     res.json(folders);
   } catch (error) {
     console.error(error.message);

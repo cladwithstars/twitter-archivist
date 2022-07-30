@@ -33,7 +33,6 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
     try {
       await axios.delete(`${DELETE_TWEET_PATH}/${folderName}/${_id}`);
       if (folderName && folderId) {
-        console.log("updating folder context");
         let folderToUpdate = folders[folderName];
         folderToUpdate = {
           ...folderToUpdate,

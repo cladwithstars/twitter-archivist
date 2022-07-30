@@ -17,7 +17,7 @@ router.get("/", auth, async (req, res) => {
     const user = await User.findById(req.user.id).select("-password"); //don't want to retrn password
     res.json(user);
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.status(500).send("Server error");
   }
 });

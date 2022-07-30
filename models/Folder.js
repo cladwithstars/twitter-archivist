@@ -9,6 +9,10 @@ const FolderSchema = mongoose.Schema({
     type: Array,
     required: true,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now(), // keeps track of last time folder was *modified* - not creation date

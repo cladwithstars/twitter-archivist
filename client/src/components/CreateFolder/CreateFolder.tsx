@@ -12,6 +12,8 @@ import { FolderContext } from "../../context/FolderContext";
 
 import { CREATE_FOLDER_PATH, COLOURS } from "../../shared/constants";
 
+import AuthContext from "../../context/auth/authContext";
+
 import axios from "axios";
 
 const style = {
@@ -27,6 +29,8 @@ const style = {
 };
 
 const CreateFolder = () => {
+  const authContext = useContext(AuthContext);
+  // console.log("authContext: ", authContext);
   const [folders, setFolders] = useContext(FolderContext);
   const folderNames = folders.map((folder) => folder.name);
   const [folderAlreadyExists, setFolderAlreadyExists] = useState(false);
@@ -40,6 +44,7 @@ const CreateFolder = () => {
     try {
       const { data } = await axios.post(CREATE_FOLDER_PATH, {
         name: folderName,
+        userId: authContext.user?._id,
       });
       setFolders([data, ...folders]);
       setOpen(false);

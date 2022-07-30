@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -16,7 +17,8 @@ import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  const { logout } = authContext;
+  const navigate = useNavigate();
+  const { user, logout } = authContext;
   const pages = ["About"];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -42,6 +44,16 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
+    navigate("/login");
+    handleCloseUserMenu();
+  };
+
+  const handleLogoClick = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/");
+    }
   };
 
   return (
@@ -51,11 +63,12 @@ const Navbar = () => {
           <FolderSpecialIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
+
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            component="button"
+            onClick={handleLogoClick}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -64,11 +77,13 @@ const Navbar = () => {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              border: "none",
             }}
           >
             Super Twitmarks
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -111,17 +126,20 @@ const Navbar = () => {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="/"
+            component="button"
+            onClick={handleLogoClick}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
-              flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              backgroundColor: "transparent",
+              cursor: "pointer",
+              border: "none",
+              justifyContent: "center",
             }}
           >
             Super Twitmarks

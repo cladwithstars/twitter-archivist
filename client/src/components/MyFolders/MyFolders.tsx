@@ -12,7 +12,7 @@ const MyFolders = () => {
   return (
     <Grid container sx={{ justifyContent: "center" }}>
       {folders.map(({ name }) => (
-        <Grid item sx={{ width: "20%", minWidth: "250px" }}>
+        <Grid item sx={{ width: "20%", minWidth: "250px" }} key={name}>
           <Link to={`/folder/${name}`}>
             <FolderCard folderName={name} />
           </Link>

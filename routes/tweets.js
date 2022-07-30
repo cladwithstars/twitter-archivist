@@ -40,7 +40,7 @@ router.post("/saveTweet", async (req, res) => {
 
     Folder.findOneAndUpdate(filter, update, function (error, success) {
       if (error) {
-        console.log(error);
+        console.error(error);
       }
     });
 
@@ -68,7 +68,7 @@ router.delete("/:folderName/:tweetId", async (req, res) => {
     };
     Folder.findOneAndUpdate(filter, update, function (error, success) {
       if (error) {
-        console.log(error);
+        console.error(error);
       }
     });
 
