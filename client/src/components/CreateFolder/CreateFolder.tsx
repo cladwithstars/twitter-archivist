@@ -10,7 +10,7 @@ import {
 
 import { FolderContext } from "../../context/FolderContext";
 
-import { FOLDERS_PATH, COLOURS } from "../../shared/constants";
+import { FOLDERS_PATH } from "../../shared/constants";
 
 import AuthContext from "../../context/auth/authContext";
 
@@ -23,7 +23,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: `2px solid ${COLOURS.darkPurple} `,
+  border: `2px solid black`,
   boxShadow: 24,
   p: 4,
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, CardContent, Typography, CardActions } from "@mui/material";
-import FolderIcon from "@mui/icons-material/Folder";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import FolderActions from "./FolderActions/FolderActions";
 
