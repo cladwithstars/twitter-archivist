@@ -20,14 +20,24 @@ const style = {
   p: 4,
 };
 
-const EditModal = () => {
+interface Props {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const EditModal: React.FC<Props> = ({ open, setOpen }) => {
   const [folderName, setFolderName] = useState("");
-  const [open, setOpen] = useState(false);
+
   const handleSubmit = () => {};
-  const handleInputChange = () => {};
-  const handleClose = () => {};
+  const handleInputChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setFolderName(e.target.value);
+  };
+  const handleClose = () => setOpen(false);
   return (
     <Modal
+      // disableBackdropClick
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
@@ -35,7 +45,7 @@ const EditModal = () => {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Create Folder
+          Rename Folder
         </Typography>
         <form onSubmit={handleSubmit}>
           <FormControl

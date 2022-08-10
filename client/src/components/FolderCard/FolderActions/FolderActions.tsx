@@ -4,6 +4,7 @@ import { FolderContext } from "../../../context/FolderContext";
 import axios from "axios";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Typography, Menu, IconButton } from "@mui/material";
+import EditModal from "./EditModal";
 
 interface Props {
   folderName: string;
@@ -11,6 +12,7 @@ interface Props {
 
 const FolderActions: React.FC<Props> = ({ folderName }) => {
   const [folders, setFolders] = useContext(FolderContext);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [anchorElOptions, setAnchorElOptions] = useState<null | HTMLElement>(
     null
   );
@@ -20,11 +22,14 @@ const FolderActions: React.FC<Props> = ({ folderName }) => {
     setAnchorElOptions(e.currentTarget);
   };
   const handleCloseUserMenu = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     e.stopPropagation();
     setAnchorElOptions(null);
   };
   const handleEdit = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     e.stopPropagation();
+    setEditModalOpen(true);
   };
   const updateContext = () => {
     const updatedFolders = folders.filter(
@@ -47,6 +52,9 @@ const FolderActions: React.FC<Props> = ({ folderName }) => {
   };
   return (
     <div>
+      {editModalOpen && (
+        <EditModal open={editModalOpen} setOpen={setEditModalOpen} />
+      )}
       <IconButton size="small" onClick={handleOpenUserMenu}>
         <MoreHorizIcon />
       </IconButton>
