@@ -49,4 +49,27 @@ router.delete("/:name", async (req, res) => {
   }
 });
 
+// rename folder
+router.put("/:name", async (req, res) => {
+  const { newName } = req.body;
+
+  try {
+    const filter = { name: req.params.name };
+    const update = {
+      $set: { name: newName },
+    };
+
+    Folder.findOneAndUpdate(filter, update, function (error, success) {
+      if (error) {
+        console.error(error);
+      }
+    });
+    console.log("updated!");
+    res.json(newName);
+  } catch (err) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

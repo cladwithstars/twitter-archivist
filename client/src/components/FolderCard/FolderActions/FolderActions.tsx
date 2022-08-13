@@ -3,40 +3,46 @@ import { FOLDERS_PATH } from "../../../shared/constants";
 import { FolderContext } from "../../../context/FolderContext";
 import axios from "axios";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { Typography, Menu, IconButton } from "@mui/material";
-import EditModal from "./EditModal";
+import { Menu, IconButton, Typography } from "@mui/material";
 
 interface Props {
   folderName: string;
+  rename: boolean;
+  setRename: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FolderActions: React.FC<Props> = ({ folderName }) => {
+const FolderActions: React.FC<Props> = ({ folderName, rename, setRename }) => {
   const [folders, setFolders] = useContext(FolderContext);
-  const [editModalOpen, setEditModalOpen] = useState(false);
   const [anchorElOptions, setAnchorElOptions] = useState<null | HTMLElement>(
     null
   );
+
   const handleOpenUserMenu = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     e.stopPropagation();
     setAnchorElOptions(e.currentTarget);
   };
+
   const handleCloseUserMenu = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     e.stopPropagation();
     setAnchorElOptions(null);
   };
+
   const handleEdit = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    setEditModalOpen(true);
+    setRename(true);
+    setAnchorElOptions(null);
   };
+
   const updateContext = () => {
     const updatedFolders = folders.filter(
       (folder) => folder.name !== folderName
     );
     setFolders(updatedFolders);
   };
+
   const deleteFolder = async () => {
     try {
       await axios.delete(`${FOLDERS_PATH}/${folderName}`);
@@ -45,16 +51,15 @@ const FolderActions: React.FC<Props> = ({ folderName }) => {
       console.error("delete folder failed");
     }
   };
+
   const handleDelete = (e) => {
     e.preventDefault();
     e.stopPropagation();
     deleteFolder();
   };
+
   return (
     <div>
-      {editModalOpen && (
-        <EditModal open={editModalOpen} setOpen={setEditModalOpen} />
-      )}
       <IconButton size="small" onClick={handleOpenUserMenu}>
         <MoreHorizIcon />
       </IconButton>
