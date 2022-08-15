@@ -6,6 +6,7 @@ import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import FolderActions from "./FolderActions/FolderActions";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../../shared/constants";
 
 interface Props {
   folderName: string;
@@ -59,7 +60,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
         />
       </CardActions>
       <CardContent>
-        <Link to={`/folder/${folderName}`}>
+        <Link to={`${BASE_URL}/folder/${folderName}`}>
           <FolderOutlinedIcon />
         </Link>
         {rename ? (
@@ -69,7 +70,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
             onKeyDown={handleKeyDown}
           />
         ) : (
-          <Link to={`/folder/${folderName}`}>
+          <Link to={`${BASE_URL}/folder/${folderName}`}>
             <Typography
               variant="h5"
               sx={{ fontSize: 16 }}

@@ -8,6 +8,7 @@ import Register from "./components/Auth/Register";
 import { FolderContext } from "./context/FolderContext";
 import AuthContext from "./context/auth/authContext";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BASE_URL } from "./shared/constants";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -38,7 +39,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           {folders.map(({ name }) => (
-            <Route key={name} path="folder/:name" element={<FolderPage />} />
+            <Route
+              key={name}
+              path={`${BASE_URL}/folder/:name`}
+              element={<FolderPage />}
+            />
           ))}
         </Routes>
       </div>
