@@ -60,7 +60,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
         />
       </CardActions>
       <CardContent>
-        <Link to={`${BASE_URL}/folder/${folderName}`}>
+        <Link to={`/folder/${folderName}`}>
           <FolderOutlinedIcon />
         </Link>
         {rename ? (
@@ -70,7 +70,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
             onKeyDown={handleKeyDown}
           />
         ) : (
-          <Link to={`${BASE_URL}/folder/${folderName}`}>
+          <Link to={`/folder/${folderName}`}>
             <Typography
               variant="h5"
               sx={{ fontSize: 16 }}
