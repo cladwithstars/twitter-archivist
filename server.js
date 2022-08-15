@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(__dirname + "/client/build/index.html");
   });
 
-  app.get("/folders/*", (req, res) => {
+  app.get("/*", (req, res) => {
     res.redirect("/");
   });
 
