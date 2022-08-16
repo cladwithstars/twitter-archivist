@@ -12,7 +12,7 @@ const HomePage = () => {
   const { isAuthenticated, loading } = authContext;
 
   useEffect(() => {
-    if (!isAuthenticated && !loading) {
+    if (!isAuthenticated) {
       navigate("/login");
     }
   }, [isAuthenticated]);
