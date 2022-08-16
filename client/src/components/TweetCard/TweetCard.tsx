@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   Typography,
+  IconButton,
   CardActions,
   Button,
 } from "@mui/material";
@@ -12,6 +13,7 @@ import { FolderContext } from "../../context/FolderContext";
 import { TWEETS_PATH } from "../../shared/constants";
 import axios from "axios";
 import { Tweet } from "../../shared/types";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface Props {
   tweet: Tweet;
@@ -21,7 +23,8 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   const [folders, setFolders] = useContext(FolderContext);
   const params = useParams();
   const folderName = params.name;
-  const folderId = folderName ? folders[folderName]?._id : null;
+  const ourFolder = folders.find((folder) => folder.name === params.name);
+  const folderId = folderName ? ourFolder._id : null;
   const { url, text, username, displayPhoto, datePosted, displayName, _id } =
     tweet;
 
@@ -32,15 +35,16 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   const deleteTweet = async () => {
     try {
       await axios.delete(`${TWEETS_PATH}/${folderName}/${_id}`);
+
       if (folderName && folderId) {
-        let folderToUpdate = folders[folderName];
-        folderToUpdate = {
-          ...folderToUpdate,
-          tweets: folderToUpdate.tweets.filter((tweet) => tweet._id !== _id),
+        const folderToUpdate = {
+          ...ourFolder,
+          tweets: ourFolder.tweets.filter((tweet) => tweet._id !== _id),
         };
+
         setFolders([
           folderToUpdate,
-          folders.filter((folder) => folder._id !== folderId),
+          ...folders.filter((folder) => folder._id !== folderId),
         ]);
       }
     } catch {
@@ -62,9 +66,9 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
       className="tweet"
     >
       <CardActions>
-        <Button size="small" onClick={handleDelete}>
-          Delete
-        </Button>
+        <IconButton sx={{ color: "red" }} onClick={handleDelete}>
+          <DeleteIcon />
+        </IconButton>
       </CardActions>
       <CardContent>
         <Typography color="text.primary" className="name" component="span">

@@ -64,7 +64,7 @@ router.put("/:name", async (req, res) => {
         console.error(error);
       }
     });
-    console.log("updated!");
+
     res.json(newName);
   } catch (err) {
     console.error(error.message);

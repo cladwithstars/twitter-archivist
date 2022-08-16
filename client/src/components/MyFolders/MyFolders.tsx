@@ -11,8 +11,8 @@ const MyFolders = () => {
 
   return (
     <Grid container sx={{ justifyContent: "center" }}>
-      {folders.map(({ name }) => (
-        <Grid item sx={{ width: "20%", minWidth: "250px" }} key={name}>
+      {folders.map(({ name, _id }) => (
+        <Grid item sx={{ width: "20%", minWidth: "250px" }} key={_id}>
           <FolderCard folderName={name} />
         </Grid>
       ))}

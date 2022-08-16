@@ -13,7 +13,6 @@ const Login = () => {
   const [loginError, setLoginError] = useState(false);
 
   useEffect(() => {
-    console.log("error is: ", error);
     if (isAuthenticated) {
       navigate("/");
     }

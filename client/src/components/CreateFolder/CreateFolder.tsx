@@ -30,7 +30,6 @@ const style = {
 
 const CreateFolder = () => {
   const authContext = useContext(AuthContext);
-  // console.log("authContext: ", authContext);
   const [folders, setFolders] = useContext(FolderContext);
   const folderNames = folders.map((folder) => folder.name);
   const [folderAlreadyExists, setFolderAlreadyExists] = useState(false);

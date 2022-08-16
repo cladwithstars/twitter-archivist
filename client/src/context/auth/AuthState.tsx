@@ -58,8 +58,6 @@ const AuthState = ({ children }) => {
 
       loadUser();
     } catch (err: any) {
-      // console.log("err: ", err.response.data.errors);
-
       dispatch({
         type: REGISTER_FAIL,
         payload: "register fail",

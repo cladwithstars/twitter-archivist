@@ -83,8 +83,8 @@ const SaveTweetForm = () => {
             label="Select Folder to Save Tweet to"
             onChange={handleFolderChange}
           >
-            {folders.map(({ name }) => (
-              <MenuItem value={name} key={name}>
+            {folders.map(({ name, _id }) => (
+              <MenuItem value={name} key={_id}>
                 {name}
               </MenuItem>
             ))}
