@@ -18,9 +18,14 @@ app.use("/api/tweets", require("./routes/tweets"));
 
 // serve static assets in production
 if (process.env.NODE_ENV === "production") {
-  app.get("/*", (req, res) => {
+  app.get("", (req, res) => {
     res.sendFile(__dirname + "/client/build/index.html");
   });
+
+  app.get("/*"),
+    (req, res) => {
+      res.redirect("/");
+    };
 
   app.use("", express.static(__dirname + "/client/build/"));
 }
