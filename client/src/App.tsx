@@ -39,11 +39,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           {folders.map(({ name }) => (
-            <Route
-              key={name}
-              path={`${BASE_URL}/folder/:name`}
-              element={<FolderPage />}
-            />
+            <Route key={name} path={`/folder/:name`} element={<FolderPage />} />
           ))}
         </Routes>
       </div>
