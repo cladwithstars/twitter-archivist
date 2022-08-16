@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import SaveTweetForm from "../components/SaveTweetForm/SaveTweetForm";
 import MyFolders from "../components/MyFolders/MyFolders";
 import CreateFolder from "../components/CreateFolder/CreateFolder";
@@ -10,9 +10,13 @@ const HomePage = () => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const { isAuthenticated } = authContext;
-  if (!isAuthenticated) {
-    navigate("/login");
-  }
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated]);
+
   return (
     <Container sx={{ width: "95%" }}>
       <SaveTweetForm />
