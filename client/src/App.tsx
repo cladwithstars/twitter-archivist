@@ -8,7 +8,6 @@ import Register from "./components/Auth/Register";
 import { FolderContext } from "./context/FolderContext";
 import AuthContext from "./context/auth/authContext";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { BASE_URL } from "./shared/constants";
 
 function App() {
   const authContext = useContext(AuthContext);
