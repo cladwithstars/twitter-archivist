@@ -17,17 +17,13 @@ app.use("/api/folders", require("./routes/folders"));
 app.use("/api/tweets", require("./routes/tweets"));
 
 // serve static assets in production
-// if (process.env.NODE_ENV === "production") {
-app.get("", (req, res) => {
-  res.sendFile(__dirname + "/client/build/index.html");
-});
+if (process.env.NODE_ENV === "production") {
+  app.get("*", (req, res) => {
+    res.sendFile(__dirname + "/client/build/index.html");
+  });
 
-app.get("/*", (req, res) => {
-  res.sendFile(__dirname + "/client/build/index.html");
-});
-
-app.use("", express.static(__dirname + "/client/build/"));
-// }
+  app.use("", express.static(__dirname + "/client/build/"));
+}
 
 const PORT = process.env.PORT || 5500;
 
