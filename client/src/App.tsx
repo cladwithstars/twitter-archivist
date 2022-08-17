@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import FolderPage from "./pages/FolderPage";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Auth/Login";
+import InvalidRoute from "./components/InvalidRoute";
 import Register from "./components/Auth/Register";
 import { FolderContext } from "./context/FolderContext";
 import AuthContext from "./context/auth/authContext";
@@ -40,6 +41,7 @@ function App() {
           {folders.map(({ name, _id }) => (
             <Route key={_id} path={`/folder/:name`} element={<FolderPage />} />
           ))}
+          <Route path="*" element={<InvalidRoute />} />
         </Routes>
       </div>
     </BrowserRouter>
