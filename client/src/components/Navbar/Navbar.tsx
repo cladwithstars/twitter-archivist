@@ -8,10 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
@@ -72,7 +71,7 @@ const Navbar = () => {
           >
             Super Twitmarks
           </Typography>
-          <p>{user?.email}</p>
+          <p></p>
 
           <FolderSpecialIcon
             sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
@@ -102,8 +101,12 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0, color: "white", fontSize: "16px" }}
+              >
+                {user?.email}
+                <SettingsIcon />
               </IconButton>
             </Tooltip>
             <Menu
@@ -122,7 +125,27 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Button onClick={handleLogout}>Logout</Button>
+              <Typography
+                variant="h6"
+                noWrap
+                component="button"
+                onClick={handleLogout}
+                sx={{
+                  display: "flex",
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".1rem",
+                  color: "purple",
+                  textDecoration: "none",
+                  backgroundColor: "transparent",
+                  cursor: "pointer",
+                  border: "none",
+                  margin: "0 auto",
+                  padding: "5px",
+                }}
+              >
+                Logout
+              </Typography>
             </Menu>
           </Box>
         </Toolbar>

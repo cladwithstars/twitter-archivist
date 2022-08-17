@@ -58,7 +58,7 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   return (
     <Card
       sx={{
-        width: "80%",
+        // width: "80%",
         margin: "0 auto",
         marginBottom: "10px",
         // backgroundColor: "lightskyblue",

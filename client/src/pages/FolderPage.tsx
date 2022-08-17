@@ -29,9 +29,13 @@ const FolderPage = () => {
     <div>
       <h2>{params.folder}</h2>
       {tweets?.length ? (
-        <Grid container sx={{ margin: "0 auto", width: "80%" }}>
+        <Grid container sx={{ margin: "0 auto", justifyContent: "center" }}>
           {tweets.map((tweet) => (
-            <Grid item key={tweet._id || tweet.url} sx={{ minWidth: "300px" }}>
+            <Grid
+              item
+              key={tweet._id || tweet.url}
+              sx={{ minWidth: "300px", margin: "10px" }}
+            >
               <TweetCard tweet={tweet} />
             </Grid>
           ))}
