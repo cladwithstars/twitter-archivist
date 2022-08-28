@@ -9,13 +9,16 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, loading } = authContext;
+  const { isAuthenticated, loading, logout } = authContext;
 
   useEffect(() => {
+    console.log("auth: ", isAuthenticated);
+    console.log("loading: ", loading);
     if (!isAuthenticated && !loading) {
+      logout();
       navigate("/login");
     }
-  }, [isAuthenticated, loading, navigate]);
+  }, [isAuthenticated, loading, navigate, logout]);
 
   return (
     <Container sx={{ width: "95%" }}>
