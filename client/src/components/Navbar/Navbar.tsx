@@ -74,7 +74,7 @@ const Navbar = () => {
           <p></p>
 
           <FolderSpecialIcon
-            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+            sx={{ display: { xs: "none", sm: "flex", md: "none" }, mr: 1 }}
           />
           <Typography
             variant="h5"
@@ -83,7 +83,7 @@ const Navbar = () => {
             onClick={handleLogoClick}
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
+              display: { xs: "none", sm: "flex", md: "none" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
