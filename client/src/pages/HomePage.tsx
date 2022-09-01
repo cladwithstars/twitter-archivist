@@ -12,8 +12,6 @@ const HomePage = () => {
   const { isAuthenticated, loading, logout } = authContext;
 
   useEffect(() => {
-    console.log("auth: ", isAuthenticated);
-    console.log("loading: ", loading);
     if (!isAuthenticated && !loading) {
       logout();
       navigate("/login");

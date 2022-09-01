@@ -5,7 +5,6 @@ import {
   Typography,
   IconButton,
   CardActions,
-  Button,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import "./styles.css";
@@ -27,10 +26,6 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   const folderId = folderName ? ourFolder._id : null;
   const { url, text, username, displayPhoto, datePosted, displayName, _id } =
     tweet;
-
-  const updateContext = () => {};
-
-  const updateFolder = () => {};
 
   const deleteTweet = async () => {
     try {
@@ -58,10 +53,8 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   return (
     <Card
       sx={{
-        // width: "80%",
         margin: "0 auto",
         marginBottom: "10px",
-        // backgroundColor: "lightskyblue",
       }}
       className="tweet"
     >

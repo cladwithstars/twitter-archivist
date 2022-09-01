@@ -54,7 +54,6 @@ const SaveTweetForm = () => {
           paddingTop: 2,
           paddingBottom: 2,
           margin: "0 auto",
-          // width: "95%",
         }}
         fullWidth
       >

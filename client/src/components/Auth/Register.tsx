@@ -13,7 +13,6 @@ const Register = () => {
   const [registerError, setRegisterError] = useState(false);
 
   useEffect(() => {
-    console.log("error: ", error);
     if (isAuthenticated) {
       navigate("/");
     }

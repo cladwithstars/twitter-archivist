@@ -8,7 +8,6 @@ app.use(cors());
 
 connectDB();
 
-// middleware
 app.use(express.json({ extended: false }));
 
 app.use("/api/auth", require("./routes/auth"));

@@ -8,7 +8,7 @@ const Folder = require("../models/Folder");
 // create folder
 router.post("/", async (req, res) => {
   const { name, userId } = req.body;
-  console.log("userId: ", userId);
+
   try {
     const newFolder = new Folder({
       name,

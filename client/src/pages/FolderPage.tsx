@@ -18,8 +18,6 @@ const FolderPage = () => {
   const { isAuthenticated, loading } = authContext;
 
   useEffect(() => {
-    console.log("auth: ", isAuthenticated);
-    console.log("loading: ", loading);
     if (!isAuthenticated && !loading) {
       navigate("/login");
     }
