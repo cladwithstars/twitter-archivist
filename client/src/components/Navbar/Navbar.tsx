@@ -10,6 +10,7 @@ import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
 import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
+import HomeIcon from "@mui/icons-material/Home";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 const Navbar = () => {
@@ -36,6 +37,7 @@ const Navbar = () => {
   };
 
   const handleLogoClick = () => {
+    console.log("clicked");
     if (!user) {
       navigate("/login");
     } else {
@@ -47,10 +49,10 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <FolderSpecialIcon
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          <HomeIcon
+            onClick={handleLogoClick}
+            sx={{ display: { xs: "flex", sm: "none" }, mr: 1 }}
           />
-
           <Typography
             variant="h6"
             noWrap
@@ -71,11 +73,8 @@ const Navbar = () => {
           >
             Super Twitmarks
           </Typography>
-          <p></p>
 
-          <FolderSpecialIcon
-            sx={{ display: { xs: "none", sm: "flex", md: "none" }, mr: 1 }}
-          />
+          <FolderSpecialIcon sx={{ display: { xs: "none", sm: "flex" } }} />
           <Typography
             variant="h5"
             noWrap
