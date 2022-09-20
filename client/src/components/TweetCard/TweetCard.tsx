@@ -27,6 +27,8 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   const { url, text, username, displayPhoto, datePosted, displayName, _id } =
     tweet;
 
+  const date = datePosted ? new Date(datePosted).toLocaleDateString() : "";
+
   const deleteTweet = async () => {
     try {
       await axios.delete(`${TWEETS_PATH}/${folderName}/${_id}`);
@@ -80,6 +82,7 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
             {url}
           </a>
         </Typography>
+        <Typography>{date}</Typography>
       </CardContent>
     </Card>
   );
