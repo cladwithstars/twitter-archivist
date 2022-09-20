@@ -105,7 +105,7 @@ const Navbar = () => {
                 sx={{ p: 0, color: "white", fontSize: "16px" }}
               >
                 {user?.email}
-                <SettingsIcon />
+                {user && <SettingsIcon />}
               </IconButton>
             </Tooltip>
             <Menu
