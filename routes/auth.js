@@ -11,7 +11,6 @@ const User = require("../models/User");
 //@route    GET api/auth
 //@desc     Get logged in user
 //@access   Private
-//everytime we need to protect a route, bring in the middleware
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password"); //don't want to retrn password

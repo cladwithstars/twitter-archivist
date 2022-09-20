@@ -24,8 +24,7 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   const folderName = params.name;
   const ourFolder = folders.find((folder) => folder.name === params.name);
   const folderId = folderName ? ourFolder._id : null;
-  const { url, text, username, displayPhoto, datePosted, displayName, _id } =
-    tweet;
+  const { url, text, username, datePosted, displayName, _id } = tweet;
 
   const date = datePosted ? new Date(datePosted).toLocaleDateString() : "";
 

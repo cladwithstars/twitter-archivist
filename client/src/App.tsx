@@ -12,7 +12,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, loading } = authContext;
+  const { isAuthenticated } = authContext;
   const [folders] = useContext(FolderContext);
 
   useEffect(() => {
