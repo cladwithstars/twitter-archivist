@@ -55,6 +55,7 @@ const AuthState = ({ children }) => {
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+      console.log("loading user");
 
       loadUser();
     } catch (err: any) {

@@ -11,6 +11,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registerError, setRegisterError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,9 +22,11 @@ const Register = () => {
     }
   }, [error, isAuthenticated, clearErrors, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    register({ email, password });
+    setLoading(true);
+    await register({ email, password });
+    setLoading(false);
   };
 
   return (
@@ -40,7 +43,7 @@ const Register = () => {
         error={registerError}
         helperText={
           registerError &&
-          "Must register with a valid email and password of 6 or more characters"
+          "Must register with a valid email not tied to another account and a password of 6 or more characters"
         }
       />
       <TextField
@@ -57,6 +60,7 @@ const Register = () => {
         color="primary"
         variant="contained"
         value={password}
+        disabled={loading}
         sx={{ marginTop: 2 }}
       >
         Register
