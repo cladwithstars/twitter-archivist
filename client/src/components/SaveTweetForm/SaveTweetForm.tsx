@@ -7,16 +7,18 @@ import { TWEETS_PATH } from "../../shared/constants";
 
 const SaveTweetForm = () => {
   const [folders, setFolders] = useContext(FolderContext);
-  const [id, setId] = useState("");
+  const [idOrUrl, setIdOrUrl] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [folderName, setFolderName] = useState("");
+
   const saveTweet = async () => {
     try {
       const { data } = await axios.post(TWEETS_PATH, {
-        id,
+        idOrUrl,
         folder: folderName,
+        isUrl: idOrUrl.includes("twitter"),
       });
       const folderToUpdate = folders.find(
         (folder) => folder.name === folderName
@@ -26,7 +28,7 @@ const SaveTweetForm = () => {
         { ...folderToUpdate, tweets: [data, ...foldersTweets] },
         ...folders.filter((folder) => folder.name !== folderName),
       ]);
-      setId("");
+      setIdOrUrl("");
       setFolderName("");
       setLoading(false);
     } catch {
@@ -39,7 +41,7 @@ const SaveTweetForm = () => {
     if (error) {
       setError(false);
     }
-    setId(e.target.value);
+    setIdOrUrl(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -59,16 +61,15 @@ const SaveTweetForm = () => {
       >
         <TextField
           id="outlined-basic"
-          label="Enter Tweet Id"
+          label="Enter tweet url or id"
           variant="outlined"
           required
-          value={id}
+          value={idOrUrl}
           sx={{ paddingBottom: 2 }}
           onChange={handleInputChange}
           error={error}
           helperText={
-            error &&
-            "Could not save tweet. Make sure the id is a valid tweet id, or try again later"
+            error && "Could not save tweet. Make sure the url or id is a valid"
           }
         />
 
@@ -79,7 +80,7 @@ const SaveTweetForm = () => {
             select
             required
             disabled={!folders?.length}
-            label="Select Folder to Save Tweet to"
+            label="Select folder to save tweet to"
             onChange={handleFolderChange}
           >
             {folders.map(({ name, _id }) => (
@@ -92,7 +93,7 @@ const SaveTweetForm = () => {
 
         <Button
           variant="contained"
-          disabled={!id || !folderName || loading}
+          disabled={!idOrUrl || !folderName || loading}
           type="submit"
         >
           Save Tweet
