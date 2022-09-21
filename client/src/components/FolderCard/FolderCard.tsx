@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FOLDERS_PATH } from "../../shared/constants";
 import { FolderContext } from "../../context/FolderContext";
 import { Card, CardContent, Typography, CardActions } from "@mui/material";
@@ -11,10 +11,13 @@ interface Props {
   folderName: string;
 }
 
+const regex = /^[ A-Za-z0-9_@./#&+-]*$/;
+
 const FolderCard: React.FC<Props> = ({ folderName }) => {
   const [folders, setFolders] = useContext(FolderContext);
   const [rename, setRename] = useState(false);
   const [inputVal, setInputVal] = useState(folderName);
+  const [error, setError] = useState(false);
 
   const updateContext = () => {
     const folderToUpdate = folders.find((folder) => folder.name === folderName);
@@ -23,6 +26,14 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
   };
 
   const renameFolder = async () => {
+    if (!regex.test(inputVal) || inputVal.length > 40) {
+      setInputVal(folderName);
+      setError(true);
+      return;
+    }
+    if (inputVal === folderName) {
+      return;
+    }
     try {
       await axios.put(`${FOLDERS_PATH}/${folderName}`, { newName: inputVal });
       updateContext();
@@ -41,6 +52,14 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
   const handleInputChange = (e) => {
     setInputVal(e.target.value);
   };
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setError(false);
+      }, 4000);
+    }
+  }, [error]);
 
   return (
     <Card
@@ -79,6 +98,16 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
               {folderName}
             </Typography>
           </Link>
+        )}
+        {error && (
+          <Typography
+            variant="h5"
+            sx={{ fontSize: 16, color: "red" }}
+            gutterBottom
+          >
+            Invalid folder name. Must be 40 characters or less and only contain
+            letters, numbers, and valid special symbols
+          </Typography>
         )}
       </CardContent>
     </Card>

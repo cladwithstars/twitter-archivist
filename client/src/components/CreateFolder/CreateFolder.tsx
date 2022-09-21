@@ -28,11 +28,14 @@ const style = {
   p: 4,
 };
 
+const regex = /^[ A-Za-z0-9_@./#&+-]*$/;
+
 const CreateFolder = () => {
   const authContext = useContext(AuthContext);
   const [folders, setFolders] = useContext(FolderContext);
   const folderNames = folders.map((folder) => folder.name);
   const [folderAlreadyExists, setFolderAlreadyExists] = useState(false);
+  const [invalidFolderName, setInvalidFolderName] = useState(false);
   const [open, setOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
 
@@ -54,9 +57,12 @@ const CreateFolder = () => {
   };
 
   const handleInputChange = (e) => {
+    // clear any errors when user starts typing again
     if (folderAlreadyExists) {
-      // clear error when user starts typing again
       setFolderAlreadyExists(false);
+    }
+    if (invalidFolderName) {
+      setInvalidFolderName(false);
     }
     setFolderName(e.target.value);
   };
@@ -67,8 +73,23 @@ const CreateFolder = () => {
       setFolderAlreadyExists(true);
       return;
     }
+    if (!regex.test(folderName)) {
+      setInvalidFolderName(true);
+      return;
+    }
     createFolder();
   };
+
+  const getHelperText = () => {
+    if (!folderAlreadyExists && !invalidFolderName) {
+      return undefined;
+    }
+    if (folderAlreadyExists) {
+      return "Folder by that name already exists, use a different name";
+    }
+    return "Invalid folder name. Folders should be alphanumeric, allowing for the following special symbols: _@./#&+-";
+  };
+
   return (
     <>
       <Button
@@ -104,12 +125,10 @@ const CreateFolder = () => {
                 required
                 value={folderName}
                 fullWidth
+                inputProps={{ maxLength: 40 }}
                 sx={{ paddingBottom: 2 }}
-                error={folderAlreadyExists}
-                helperText={
-                  folderAlreadyExists &&
-                  "Folder by that name already exists, use a different name"
-                }
+                error={folderAlreadyExists || invalidFolderName}
+                helperText={getHelperText()}
                 onChange={handleInputChange}
               />
               <Button
