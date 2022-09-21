@@ -28,7 +28,7 @@ const style = {
   p: 4,
 };
 
-const regex = /^[ A-Za-z0-9_@./#&+-]*$/;
+const regex = /^[ A-Za-z0-9_@./#'&+-]*$/;
 
 const CreateFolder = () => {
   const authContext = useContext(AuthContext);
@@ -45,7 +45,7 @@ const CreateFolder = () => {
   const createFolder = async () => {
     try {
       const { data } = await axios.post(FOLDERS_PATH, {
-        name: folderName,
+        name: folderName.trim(),
         userId: authContext.user?._id,
       });
       setFolders([data, ...folders]);
@@ -69,14 +69,16 @@ const CreateFolder = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (folderNames.includes(folderName)) {
+    const trimmed = folderName.trim();
+    if (folderNames.includes(trimmed)) {
       setFolderAlreadyExists(true);
       return;
     }
-    if (!regex.test(folderName)) {
+    if (!regex.test(trimmed) || trimmed.length === 0) {
       setInvalidFolderName(true);
       return;
     }
+
     createFolder();
   };
 
@@ -87,7 +89,7 @@ const CreateFolder = () => {
     if (folderAlreadyExists) {
       return "Folder by that name already exists, use a different name";
     }
-    return "Invalid folder name. Folders should be alphanumeric, allowing for the following special symbols: _@./#&+-";
+    return "Invalid folder name. Folders should be alphanumeric, allowing for the following special symbols: _@./#'+-&";
   };
 
   return (

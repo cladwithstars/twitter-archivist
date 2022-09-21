@@ -11,7 +11,7 @@ interface Props {
   folderName: string;
 }
 
-const regex = /^[ A-Za-z0-9_@./#&+-]*$/;
+const regex = /^[ A-Za-z0-9_@.'/#&+-]*$/;
 
 const FolderCard: React.FC<Props> = ({ folderName }) => {
   const [folders, setFolders] = useContext(FolderContext);
@@ -57,7 +57,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
     if (error) {
       setTimeout(() => {
         setError(false);
-      }, 4000);
+      }, 6000);
     }
   }, [error]);
 
@@ -105,8 +105,8 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
             sx={{ fontSize: 16, color: "red" }}
             gutterBottom
           >
-            Invalid folder name. Must be 40 characters or less and only contain
-            letters, numbers, and valid special symbols
+            {`Invalid folder name. Must be 40 characters or less and only contain
+            letters, numbers, and valid special symbols _@./#'+-&`}
           </Typography>
         )}
       </CardContent>
