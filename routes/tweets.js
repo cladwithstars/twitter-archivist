@@ -16,12 +16,8 @@ const Tweet = require("../models/Tweet");
 
 router.post("/", async (req, res) => {
   const { idOrUrl, folder, isUrl } = req.body;
-  let id;
-  if (isUrl) {
-    id = idOrUrl.split("/").at(-1);
-  } else {
-    id = idOrUrl;
-  }
+  const id = isUrl ? idOrUrl.split("/").at(-1) : idOrUrl;
+
   try {
     const data = await client.v1.singleTweet(id);
     const { full_text, user, created_at } = data;

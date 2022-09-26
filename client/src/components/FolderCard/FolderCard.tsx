@@ -15,9 +15,12 @@ const regex = /^[ A-Za-z0-9_@.'/#&+-]*$/;
 
 const FolderCard: React.FC<Props> = ({ folderName }) => {
   const [folders, setFolders] = useContext(FolderContext);
+  const folderNames = folders.map((folder) => folder.name);
   const [rename, setRename] = useState(false);
   const [inputVal, setInputVal] = useState(folderName);
   const [error, setError] = useState(false);
+  const [folderAlreadyExists, setFolderAlreadyExists] = useState(false);
+  const [emptyNameError, setEmptyNameError] = useState(false);
 
   const updateContext = () => {
     const folderToUpdate = folders.find((folder) => folder.name === folderName);
@@ -26,16 +29,28 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
   };
 
   const renameFolder = async () => {
-    if (!regex.test(inputVal) || inputVal.length > 40) {
+    if (inputVal === folderName) {
+      return;
+    }
+    const trimmed = inputVal.trim();
+    if (trimmed === "") {
+      setInputVal(folderName);
+      setEmptyNameError(true);
+      return;
+    }
+    if (!regex.test(trimmed) || trimmed.length > 40 || trimmed.length === 0) {
       setInputVal(folderName);
       setError(true);
       return;
     }
-    if (inputVal === folderName) {
+    if (folderNames.includes(trimmed)) {
+      setInputVal(folderName);
+      setFolderAlreadyExists(true);
       return;
     }
+
     try {
-      await axios.put(`${FOLDERS_PATH}/${folderName}`, { newName: inputVal });
+      await axios.put(`${FOLDERS_PATH}/${folderName}`, { newName: trimmed });
       updateContext();
     } catch {
       console.error("rename folder failed");
@@ -58,8 +73,16 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
       setTimeout(() => {
         setError(false);
       }, 6000);
+    } else if (folderAlreadyExists) {
+      setTimeout(() => {
+        setFolderAlreadyExists(false);
+      }, 4000);
+    } else if (emptyNameError) {
+      setTimeout(() => {
+        setEmptyNameError(false);
+      }, 4000);
     }
-  }, [error]);
+  }, [error, folderAlreadyExists, emptyNameError]);
 
   return (
     <Card
@@ -105,8 +128,26 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
             sx={{ fontSize: 16, color: "red" }}
             gutterBottom
           >
-            {`Invalid folder name. Must be 40 characters or less and only contain
-            letters, numbers, and valid special symbols _@./#'+-&`}
+            {`Invalid folder name. Must be between 1 and 40 characters and only contain
+            letters, numbers, and valid special symbols (_@./#'+-&)`}
+          </Typography>
+        )}
+        {folderAlreadyExists && (
+          <Typography
+            variant="h5"
+            sx={{ fontSize: 16, color: "red" }}
+            gutterBottom
+          >
+            Folder by that name already exists
+          </Typography>
+        )}
+        {emptyNameError && (
+          <Typography
+            variant="h5"
+            sx={{ fontSize: 16, color: "red" }}
+            gutterBottom
+          >
+            Folder name must include one non-whitespace character
           </Typography>
         )}
       </CardContent>
