@@ -37,7 +37,6 @@ const Navbar = () => {
   };
 
   const handleLogoClick = () => {
-    console.log("clicked");
     if (!user) {
       navigate("/login");
     } else {

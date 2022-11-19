@@ -1,4 +1,4 @@
-import { TextField, Button, Typography } from "@mui/material";
+import { TextField, Button, Typography, CircularProgress } from "@mui/material";
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
@@ -11,6 +11,11 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    console.log("loading: ", loading);
+  }, [loading]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,13 +26,29 @@ const Login = () => {
       clearErrors();
     }
   }, [error, isAuthenticated, clearErrors, navigate]);
+
+  const Login = async () => {
+    try {
+      await login({
+        email,
+        password,
+      });
+    } catch {
+      setLoginError(true);
+    }
+
+    setLoading(false);
+
+    console.log("loading 2: ", loading);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({
-      email,
-      password,
-    });
+    setLoading(true);
+    console.log("LOADING: ", loading);
+    Login();
   };
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <TextField
@@ -52,14 +73,20 @@ const Login = () => {
         error={loginError}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button
-        type="submit"
-        color="primary"
-        sx={{ marginTop: 2 }}
-        variant="contained"
-      >
-        Log in
-      </Button>
+
+      {loading ? (
+        <CircularProgress sx={{ margin: "0 auto", marginTop: "10px" }} />
+      ) : (
+        <Button
+          type="submit"
+          color="primary"
+          sx={{ marginTop: 2 }}
+          disabled={loading}
+          variant="contained"
+        >
+          Log in
+        </Button>
+      )}
       <p>
         Don't have an account?{" "}
         <Typography

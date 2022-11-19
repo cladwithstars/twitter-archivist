@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Typography } from "@mui/material";
+import { TextField, Button, Typography, CircularProgress } from "@mui/material";
 import AuthContext from "../../context/auth/authContext";
 import "./styles.css";
 
@@ -60,15 +60,19 @@ const Register = () => {
         error={registerError}
         inputProps={{ minLength: 6, maxLength: 40 }}
       />
-      <Button
-        type="submit"
-        color="primary"
-        variant="contained"
-        disabled={loading}
-        sx={{ marginTop: 2 }}
-      >
-        Register
-      </Button>
+      {loading ? (
+        <CircularProgress sx={{ margin: "0 auto", marginTop: "10px" }} />
+      ) : (
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          disabled={loading}
+          sx={{ marginTop: 2 }}
+        >
+          Register
+        </Button>
+      )}
       <p>
         Already have an account?{" "}
         <Typography
