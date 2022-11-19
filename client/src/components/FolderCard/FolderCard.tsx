@@ -38,7 +38,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
       setEmptyNameError(true);
       return;
     }
-    if (!regex.test(trimmed) || trimmed.length > 40 || trimmed.length === 0) {
+    if (!regex.test(trimmed) || trimmed.length > 25 || trimmed.length === 0) {
       setInputVal(folderName);
       setError(true);
       return;
@@ -128,7 +128,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
             sx={{ fontSize: 16, color: "red" }}
             gutterBottom
           >
-            {`Invalid folder name. Must be between 1 and 40 characters and only contain
+            {`Invalid folder name. Must be between 1 and 25 characters and only contain
             letters, numbers, and valid special symbols (_@./#'+-&)`}
           </Typography>
         )}

@@ -127,7 +127,7 @@ const CreateFolder = () => {
                 required
                 value={folderName}
                 fullWidth
-                inputProps={{ maxLength: 40 }}
+                inputProps={{ maxLength: 25 }}
                 sx={{ paddingBottom: 2 }}
                 error={folderAlreadyExists || invalidFolderName}
                 helperText={getHelperText()}

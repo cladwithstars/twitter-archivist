@@ -56,7 +56,7 @@ router.put("/:name", async (req, res) => {
   try {
     const filter = { name: req.params.name };
     const update = {
-      $set: { name: newName },
+      $set: { name: newName, date: Date.now() },
     };
 
     Folder.findOneAndUpdate(filter, update, function (error, success) {

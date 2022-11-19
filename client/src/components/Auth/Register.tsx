@@ -25,7 +25,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await register({ email, password });
+    try {
+      await register({ email, password });
+    } catch {
+      setRegisterError(true);
+    }
     setLoading(false);
   };
 
@@ -50,6 +54,7 @@ const Register = () => {
         label="Password"
         id="password"
         type="password"
+        value={password}
         required
         onChange={(e) => setPassword(e.target.value)}
         error={registerError}
@@ -59,7 +64,6 @@ const Register = () => {
         type="submit"
         color="primary"
         variant="contained"
-        value={password}
         disabled={loading}
         sx={{ marginTop: 2 }}
       >
