@@ -34,13 +34,13 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-router.delete("/:name", async (req, res) => {
+router.delete("/:folderId", async (req, res) => {
   try {
-    let folder = await Folder.find({ name: req.params.name });
+    let folder = await Folder.find({ _id: req.params.folderId });
 
     if (!folder) return res.status(404).json({ msg: "Folder not found" });
 
-    await Folder.deleteOne({ name: req.params.name });
+    await Folder.deleteOne({ _id: req.params.folderId });
 
     res.json({ msg: "Folder removed" });
   } catch (err) {
@@ -50,11 +50,11 @@ router.delete("/:name", async (req, res) => {
 });
 
 // rename folder
-router.put("/:name", async (req, res) => {
+router.put("/:folderId", async (req, res) => {
   const { newName } = req.body;
 
   try {
-    const filter = { name: req.params.name };
+    const filter = { _id: req.params.folderId };
     const update = {
       $set: { name: newName, date: Date.now() },
     };

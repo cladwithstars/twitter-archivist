@@ -24,8 +24,8 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
   const [emptyNameError, setEmptyNameError] = useState(false);
 
   const updateContext = () => {
-    const folderToUpdate = folders.find((folder) => folder.name === folderName);
-    const otherFolders = folders.filter((folder) => folder.name !== folderName);
+    const folderToUpdate = folders.find((folder) => folder._id === folderId);
+    const otherFolders = folders.filter((folder) => folder._id !== folderId);
     setFolders([{ ...folderToUpdate, name: inputVal }, ...otherFolders]);
   };
 
@@ -96,6 +96,7 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
       <CardActions>
         <FolderActions
           folderName={folderName}
+          folderId={folderId}
           rename={rename}
           setRename={setRename}
         />

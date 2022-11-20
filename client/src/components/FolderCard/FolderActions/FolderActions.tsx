@@ -7,11 +7,17 @@ import { Menu, IconButton, Typography } from "@mui/material";
 
 interface Props {
   folderName: string;
+  folderId: string;
   rename: boolean;
   setRename: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FolderActions: React.FC<Props> = ({ folderName, rename, setRename }) => {
+const FolderActions: React.FC<Props> = ({
+  folderName,
+  folderId,
+  rename,
+  setRename,
+}) => {
   const [folders, setFolders] = useContext(FolderContext);
   const [anchorElOptions, setAnchorElOptions] = useState<null | HTMLElement>(
     null
@@ -45,7 +51,7 @@ const FolderActions: React.FC<Props> = ({ folderName, rename, setRename }) => {
 
   const deleteFolder = async () => {
     try {
-      await axios.delete(`${FOLDERS_PATH}/${folderName}`);
+      await axios.delete(`${FOLDERS_PATH}/${folderId}`);
       updateContext();
     } catch {
       console.error("delete folder failed");
