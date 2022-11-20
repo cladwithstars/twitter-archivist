@@ -87,7 +87,6 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
   return (
     <Card
       sx={{
-        width: "80%",
         margin: "0 auto",
         marginBottom: "10px",
         backgroundColor: "palegoldenrod",
@@ -114,7 +113,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
           <Link to={`/folder/${folderName}`}>
             <Typography
               variant="h5"
-              sx={{ fontSize: 16 }}
+              sx={{ fontSize: 12, fontWeight: "bold" }}
               color="text.primary"
               gutterBottom
             >

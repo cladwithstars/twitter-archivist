@@ -56,7 +56,7 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
       sx={{
         margin: "0 auto",
         marginBottom: "10px",
-        maxWidth: "350px",
+        // maxWidth: "350px",
       }}
       className="tweet"
     >
