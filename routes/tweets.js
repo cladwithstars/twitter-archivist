@@ -15,7 +15,7 @@ const Folder = require("../models/Folder");
 const Tweet = require("../models/Tweet");
 
 router.post("/", async (req, res) => {
-  const { idOrUrl, folder, isUrl } = req.body;
+  const { idOrUrl, folder, isUrl, userId } = req.body;
   const id = isUrl ? idOrUrl.split("/").at(-1) : idOrUrl;
 
   try {
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
       dateSaved: Date.now(),
     });
 
-    const ourFolder = await Folder.find({ name: folder });
+    const ourFolder = await Folder.find({ userId, name: folder });
     const tweet = await newTweet.save();
 
     const filter = { _id: ourFolder[0]._id };

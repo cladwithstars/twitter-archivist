@@ -2,10 +2,12 @@ import React, { useState, useContext } from "react";
 import { TextField, Button, FormControl, MenuItem } from "@mui/material";
 import axios from "axios";
 import { FolderContext } from "../../context/FolderContext";
+import AuthContext from "../../context/auth/authContext";
 
 import { TWEETS_PATH } from "../../shared/constants";
 
 const SaveTweetForm = () => {
+  const authContext = useContext(AuthContext);
   const [folders, setFolders] = useContext(FolderContext);
   const [idOrUrl, setIdOrUrl] = useState("");
   const [error, setError] = useState(false);
@@ -19,6 +21,7 @@ const SaveTweetForm = () => {
         idOrUrl,
         folder: folderName,
         isUrl: idOrUrl.includes("twitter"),
+        userId: authContext.user?._id,
       });
       const folderToUpdate = folders.find(
         (folder) => folder.name === folderName
