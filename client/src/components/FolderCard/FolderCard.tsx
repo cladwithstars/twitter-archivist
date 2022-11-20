@@ -101,7 +101,10 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
         />
       </CardActions>
       <CardContent>
-        <Link to={`/folder/${folderId}`}>
+        <Link
+          to={`/folder/${folderId}`}
+          style={{ textDecoration: "none", color: "#1976d2" }}
+        >
           <FolderOutlinedIcon />
         </Link>
         {rename ? (
@@ -111,7 +114,10 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
             onKeyDown={handleKeyDown}
           />
         ) : (
-          <Link to={`/folder/${folderId}`}>
+          <Link
+            to={`/folder/${folderId}`}
+            style={{ textDecoration: "none", color: "#1976d2" }}
+          >
             <Typography
               variant="h5"
               sx={{ fontSize: 12, fontWeight: "bold" }}

@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import { FolderContext } from "../context/FolderContext";
 import TweetCard from "../components/TweetCard/TweetCard";
 import { Grid } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { Folder, Tweet } from "../shared/types";
+import { Link } from "react-router-dom";
 import AuthContext from "../context/auth/authContext";
 
 const FolderPage = () => {
@@ -25,7 +27,12 @@ const FolderPage = () => {
 
   return (
     <div>
-      <h2>{params.folder}</h2>
+      <h2>
+        <Link to="/" style={{ textDecoration: "none", color: "#1976d2" }}>
+          <ArrowBackIcon />
+        </Link>
+        {"  "} {folder.name}
+      </h2>
       {tweets?.length ? (
         <Grid container sx={{ margin: "0 auto", justifyContent: "center" }}>
           {tweets.map((tweet) => (
