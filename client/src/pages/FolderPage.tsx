@@ -11,9 +11,9 @@ const FolderPage = () => {
   const params = useParams();
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
-  const folderName = params.name;
+  const folderId = params._id;
   const [folders] = useContext(FolderContext);
-  const folder = folders.find((f: Folder) => f.name === folderName);
+  const folder = folders.find((f: Folder) => f._id === folderId);
   const tweets: Array<Tweet> = folder["tweets"];
   const { isAuthenticated, loading } = authContext;
 

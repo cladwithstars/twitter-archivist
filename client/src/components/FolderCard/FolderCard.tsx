@@ -9,11 +9,12 @@ import axios from "axios";
 
 interface Props {
   folderName: string;
+  folderId: any;
 }
 
 const regex = /^[ A-Za-z0-9_@.'/#&+-]*$/;
 
-const FolderCard: React.FC<Props> = ({ folderName }) => {
+const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
   const [folders, setFolders] = useContext(FolderContext);
   const folderNames = folders.map((folder) => folder.name);
   const [rename, setRename] = useState(false);
@@ -100,7 +101,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
         />
       </CardActions>
       <CardContent>
-        <Link to={`/folder/${folderName}`}>
+        <Link to={`/folder/${folderId}`}>
           <FolderOutlinedIcon />
         </Link>
         {rename ? (
@@ -110,7 +111,7 @@ const FolderCard: React.FC<Props> = ({ folderName }) => {
             onKeyDown={handleKeyDown}
           />
         ) : (
-          <Link to={`/folder/${folderName}`}>
+          <Link to={`/folder/${folderId}`}>
             <Typography
               variant="h5"
               sx={{ fontSize: 12, fontWeight: "bold" }}

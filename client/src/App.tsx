@@ -33,7 +33,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           {folders.map(({ name, _id }) => (
-            <Route key={_id} path={`/folder/:name`} element={<FolderPage />} />
+            <Route key={_id} path={`/folder/:_id`} element={<FolderPage />} />
           ))}
           <Route path="*" element={<InvalidRoute />} />
         </Routes>
