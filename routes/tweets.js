@@ -29,6 +29,7 @@ router.post("/", async (req, res) => {
       displayName: name,
       datePosted: created_at,
       profileImg: profile_image_url,
+      dateSaved: Date.now(),
     });
 
     const ourFolder = await Folder.find({ name: folder });
@@ -37,7 +38,12 @@ router.post("/", async (req, res) => {
     const filter = { _id: ourFolder[0]._id };
     const update = {
       $set: { date: Date.now() },
-      $push: { tweets: newTweet },
+      $push: {
+        tweets: {
+          $each: [newTweet],
+          $position: 0,
+        },
+      },
     };
 
     Folder.findOneAndUpdate(filter, update, function (error, success) {

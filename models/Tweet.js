@@ -22,7 +22,7 @@ const TweetSchema = mongoose.Schema({
   profileImg: {
     type: String,
   },
-  date: {
+  dateSaved: {
     type: Date,
     default: Date.now(),
   },
