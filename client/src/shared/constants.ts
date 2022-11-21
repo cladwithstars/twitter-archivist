@@ -1,10 +1,10 @@
 // const port = process.env.PORT || 5000;
-// export const BASE_URL =
-//   process.env.NODE_ENV === "production"
-//     ? "https://super-twitmarks.herokuapp.com"
-//     : `http://localhost:${port}`;
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://super-twitmarks.herokuapp.com"
+    : `http://localhost:5000`;
 
-export const BASE_URL = "https://super-twitmarks.herokuapp.com";
+// export const BASE_URL = "https://super-twitmarks.herokuapp.com";
 
 export const FOLDERS_PATH = `${BASE_URL}/api/folders`;
 

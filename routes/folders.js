@@ -67,7 +67,7 @@ router.put("/:folderId", async (req, res) => {
 
     res.json(newName);
   } catch (err) {
-    console.error(error.message);
+    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });

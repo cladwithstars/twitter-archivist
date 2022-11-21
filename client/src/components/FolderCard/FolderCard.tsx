@@ -51,7 +51,7 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
     }
 
     try {
-      await axios.put(`${FOLDERS_PATH}/${folderName}`, { newName: trimmed });
+      await axios.put(`${FOLDERS_PATH}/${folderId}`, { newName: trimmed });
       updateContext();
     } catch {
       console.error("rename folder failed");

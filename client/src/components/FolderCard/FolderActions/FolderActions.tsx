@@ -43,9 +43,7 @@ const FolderActions: React.FC<Props> = ({
   };
 
   const updateContext = () => {
-    const updatedFolders = folders.filter(
-      (folder) => folder.name !== folderName
-    );
+    const updatedFolders = folders.filter((folder) => folder._id !== folderId);
     setFolders(updatedFolders);
   };
 
