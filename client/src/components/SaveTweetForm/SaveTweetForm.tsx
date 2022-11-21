@@ -8,6 +8,7 @@ import { TWEETS_PATH } from "../../shared/constants";
 
 const SaveTweetForm = () => {
   const authContext = useContext(AuthContext);
+  const userId = authContext.user?._id;
   const [folders, setFolders] = useContext(FolderContext);
   const [idOrUrl, setIdOrUrl] = useState("");
   const [error, setError] = useState(false);
@@ -21,15 +22,17 @@ const SaveTweetForm = () => {
         idOrUrl,
         folder: folderName,
         isUrl: idOrUrl.includes("twitter"),
-        userId: authContext.user?._id,
+        userId,
       });
       const folderToUpdate = folders.find(
-        (folder) => folder.name === folderName
+        (folder) => folder.name === folderName && folder.userId === userId
       );
       const foldersTweets = folderToUpdate["tweets"];
       setFolders([
         { ...folderToUpdate, tweets: [data, ...foldersTweets] },
-        ...folders.filter((folder) => folder.name !== folderName),
+        ...folders.filter(
+          (folder) => folder.name !== folderName || folder.userId !== userId
+        ),
       ]);
       setIdOrUrl("");
       setFolderName("");
