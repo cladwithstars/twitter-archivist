@@ -59,13 +59,13 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:folderName/:tweetId", async (req, res) => {
+router.delete("/:folderId/:tweetId", async (req, res) => {
   try {
-    let folder = await Folder.find({ name: req.params.folderName });
+    let folder = await Folder.find({ _id: req.params.folderId });
 
     if (!folder) return res.status(404).json({ msg: "Folder not found" });
 
-    const filter = { _id: folder[0]._id };
+    const filter = { _id: req.params.folderId };
     const update = {
       $set: { date: Date.now() },
       $set: {
@@ -80,7 +80,7 @@ router.delete("/:folderName/:tweetId", async (req, res) => {
       }
     });
 
-    res.json({ msg: "Folder removed" });
+    res.json({ msg: "Tweet removed" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

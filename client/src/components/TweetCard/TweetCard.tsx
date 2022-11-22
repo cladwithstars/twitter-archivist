@@ -21,30 +21,28 @@ interface Props {
 const TweetCard: React.FC<Props> = ({ tweet }) => {
   const [folders, setFolders] = useContext(FolderContext);
   const params = useParams();
-  const folderName = params.name;
-  const ourFolder = folders.find((folder) => folder.name === params.name);
-  const folderId = folderName ? ourFolder._id : null;
+  const folderId = params._id;
+  const ourFolder = folders.find((folder) => folder._id === folderId);
   const { url, text, username, datePosted, displayName, _id } = tweet;
+  const tweetId = _id;
 
   const date = datePosted ? new Date(datePosted).toLocaleDateString() : "";
 
   const deleteTweet = async () => {
     try {
-      await axios.delete(`${TWEETS_PATH}/${folderName}/${_id}`);
+      await axios.delete(`${TWEETS_PATH}/${folderId}/${tweetId}`);
 
-      if (folderName && folderId) {
-        const folderToUpdate = {
-          ...ourFolder,
-          tweets: ourFolder.tweets.filter((tweet) => tweet._id !== _id),
-        };
+      const updatedFolder = {
+        ...ourFolder,
+        tweets: ourFolder.tweets.filter((tweet) => tweet._id !== _id),
+      };
 
-        setFolders([
-          folderToUpdate,
-          ...folders.filter((folder) => folder._id !== folderId),
-        ]);
-      }
+      setFolders([
+        updatedFolder,
+        ...folders.filter((folder) => folder._id !== folderId),
+      ]);
     } catch {
-      console.error("could not delete folder");
+      console.error("could not delete tweet");
     }
   };
 
