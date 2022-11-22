@@ -110,6 +110,7 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
         </Link>
         {rename ? (
           <input
+            maxLength={25}
             value={inputVal}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
