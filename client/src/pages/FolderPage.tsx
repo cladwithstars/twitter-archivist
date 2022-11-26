@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { FolderContext } from "../context/FolderContext";
 import TweetCard from "../components/TweetCard/TweetCard";
-import { Grid } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { Folder, Tweet } from "../shared/types";
@@ -18,12 +18,31 @@ const FolderPage = () => {
   const folder = folders.find((f: Folder) => f._id === folderId);
   const tweets: Array<Tweet> = folder["tweets"];
   const { isAuthenticated, loading } = authContext;
+  const [filterString, setFilterString] = useState("");
 
   useEffect(() => {
     if (!isAuthenticated && !loading) {
       navigate("/login");
     }
   }, [isAuthenticated, loading, navigate]);
+
+  const filteredTweets = useMemo(
+    () =>
+      filterString === ""
+        ? tweets
+        : tweets.filter((tweet) => {
+            const { text, username, displayName, datePosted, url } = tweet;
+            const formattedFilterString = filterString.toLowerCase();
+            return (
+              text.toLowerCase().includes(formattedFilterString) ||
+              username.toLowerCase().includes(formattedFilterString) ||
+              displayName?.toLowerCase().includes(formattedFilterString) ||
+              datePosted?.toLowerCase().includes(formattedFilterString) ||
+              url.toLowerCase().includes(formattedFilterString)
+            );
+          }),
+    [filterString, tweets]
+  );
 
   return (
     <div>
@@ -33,9 +52,19 @@ const FolderPage = () => {
         </Link>
         {"  "} {folder.name}
       </h2>
-      {tweets?.length ? (
+      {tweets.length > 0 && (
+        <TextField
+          label="Filter tweets..."
+          variant="outlined"
+          value={filterString}
+          fullWidth
+          sx={{ paddingBottom: 2, width: "200px" }}
+          onChange={(e) => setFilterString(e.target.value)}
+        />
+      )}
+      {filteredTweets?.length ? (
         <Grid container sx={{ margin: "0 auto", justifyContent: "center" }}>
-          {tweets.map((tweet) => (
+          {filteredTweets.map((tweet) => (
             <Grid
               item
               key={tweet._id || tweet.url}
@@ -46,7 +75,7 @@ const FolderPage = () => {
           ))}
         </Grid>
       ) : (
-        <p>No tweets saved to this folder yet...</p>
+        <p>No tweets to display...</p>
       )}
     </div>
   );
