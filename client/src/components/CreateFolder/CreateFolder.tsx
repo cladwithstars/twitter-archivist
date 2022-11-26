@@ -125,6 +125,8 @@ const CreateFolder = () => {
                 label="Enter name of new folder"
                 variant="outlined"
                 required
+                focused
+                autoFocus
                 value={folderName}
                 fullWidth
                 inputProps={{ maxLength: 25 }}

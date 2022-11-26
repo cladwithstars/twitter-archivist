@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { FOLDERS_PATH } from "../../shared/constants";
 import { FolderContext } from "../../context/FolderContext";
 import { Card, CardContent, Typography, CardActions } from "@mui/material";
@@ -16,6 +16,7 @@ const regex = /^[ A-Za-z0-9_@.'/#&+-]*$/;
 
 const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
   const [folders, setFolders] = useContext(FolderContext);
+  const inputRef = useRef<any>(null);
   const folderNames = folders.map((folder) => folder.name);
   const [rename, setRename] = useState(false);
   const [inputVal, setInputVal] = useState(folderName);
@@ -28,6 +29,12 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
     const otherFolders = folders.filter((folder) => folder._id !== folderId);
     setFolders([{ ...folderToUpdate, name: inputVal }, ...otherFolders]);
   };
+
+  useEffect(() => {
+    if (rename) {
+      inputRef.current.focus();
+    }
+  }, [rename]);
 
   const renameFolder = async () => {
     if (inputVal === folderName) {
@@ -111,6 +118,7 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
         {rename ? (
           <input
             maxLength={25}
+            ref={inputRef}
             value={inputVal}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}

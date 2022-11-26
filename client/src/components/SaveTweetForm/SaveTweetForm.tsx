@@ -1,5 +1,12 @@
 import React, { useState, useContext } from "react";
-import { TextField, Button, FormControl, MenuItem } from "@mui/material";
+import {
+  TextField,
+  Button,
+  FormControl,
+  MenuItem,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import axios from "axios";
 import { FolderContext } from "../../context/FolderContext";
 import AuthContext from "../../context/auth/authContext";
@@ -15,6 +22,12 @@ const SaveTweetForm = () => {
   const [loading, setLoading] = useState(false);
 
   const [folderName, setFolderName] = useState("");
+
+  const [alertOpen, setAlertOpen] = useState(false);
+
+  const handleClose = () => {
+    setAlertOpen(false);
+  };
 
   const saveTweet = async () => {
     try {
@@ -35,7 +48,6 @@ const SaveTweetForm = () => {
         ),
       ]);
       setIdOrUrl("");
-      setFolderName("");
       setLoading(false);
     } catch {
       setError(true);
@@ -52,6 +64,7 @@ const SaveTweetForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setAlertOpen(true);
     setLoading(true);
     saveTweet();
   };
@@ -70,6 +83,8 @@ const SaveTweetForm = () => {
           label="Enter tweet url or id"
           variant="outlined"
           required
+          focused
+          autoFocus
           value={idOrUrl}
           sx={{ paddingBottom: 2 }}
           onChange={handleInputChange}
@@ -95,8 +110,21 @@ const SaveTweetForm = () => {
               </MenuItem>
             ))}
           </TextField>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={alertOpen}
+            onClose={handleClose}
+            autoHideDuration={3000}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Tweet Saved!
+            </Alert>
+          </Snackbar>
         </FormControl>
-
         <Button
           variant="contained"
           disabled={!idOrUrl || !folderName || loading}
