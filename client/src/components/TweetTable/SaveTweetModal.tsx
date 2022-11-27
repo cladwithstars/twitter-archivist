@@ -99,7 +99,12 @@ const SaveTweetModal: React.FC<ModalProps> = ({ tweetId, open, setOpen }) => {
                 </MenuItem>
               ))}
             </TextField>
-            <Button variant="contained" fullWidth type="submit">
+            <Button
+              variant="contained"
+              fullWidth
+              type="submit"
+              style={{ marginTop: "10px" }}
+            >
               Save Tweet
             </Button>
           </FormControl>

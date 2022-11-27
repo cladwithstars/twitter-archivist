@@ -119,7 +119,7 @@ const Navbar = () => {
                 fontWeight: 700,
                 fontSize: "14px",
                 color: "inherit",
-                textDecoration: "none",
+                textDecoration: "underline",
                 backgroundColor: "transparent",
                 cursor: "pointer",
                 border: "none",
@@ -135,8 +135,8 @@ const Navbar = () => {
                 onClick={handleOpenUserMenu}
                 sx={{ p: 0, color: "white", fontSize: "16px" }}
               >
-                {user?.email}
-                {user && <SettingsIcon />}
+                {user?.email}{" "}
+                {user && <SettingsIcon style={{ marginLeft: "5px" }} />}
               </IconButton>
             </Tooltip>
             <Menu
