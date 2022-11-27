@@ -14,6 +14,44 @@ const client = new TwitterApi({
 const Folder = require("../models/Folder");
 const Tweet = require("../models/Tweet");
 
+router.get("/:username", async (req, res) => {
+  try {
+    const usernameLookup = await client.v2.userByUsername(req.params.username);
+    const { data } = usernameLookup;
+    const { id } = data;
+    const likedTweets = await client.v2.userLikedTweets(id);
+    const likes = likedTweets._realData;
+    const formattedResult = likes.data.map((tweet) => ({
+      id: tweet.id,
+      text: tweet.text,
+    }));
+    res.json(formattedResult);
+  } catch (error) {
+    console.log(error);
+    res.status(404).send("Server Error - could not get user data");
+  }
+});
+
+router.get("/details/:tweetId", async (req, res) => {
+  const id = req.params.tweetId;
+  try {
+    const data = await client.v1.singleTweet(id);
+    const { full_text, user, created_at } = data;
+    const { screen_name, name, profile_image_url } = user;
+    const tweetDetails = {
+      text: full_text || "",
+      url: screen_name ? `https://twitter.com/${screen_name}/status/${id}` : "",
+      username: screen_name || "",
+      displayName: name,
+      datePosted: created_at,
+    };
+    res.json(tweetDetails);
+  } catch (error) {
+    console.log(error);
+    res.status(404).send("Server Error - could not fetch tweet details");
+  }
+});
+
 router.post("/", async (req, res) => {
   const { idOrUrl, folder, isUrl, userId } = req.body;
   const id = isUrl ? idOrUrl.split("/").at(-1) : idOrUrl;

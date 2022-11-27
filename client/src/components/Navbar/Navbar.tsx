@@ -44,6 +44,14 @@ const Navbar = () => {
     }
   };
 
+  const goToLikes = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/likes");
+    }
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -73,7 +81,10 @@ const Navbar = () => {
             Super Twitmarks
           </Typography>
 
-          <FolderSpecialIcon sx={{ display: { xs: "none", sm: "flex" } }} />
+          <FolderSpecialIcon
+            sx={{ cursor: "pointer", display: { xs: "none", sm: "flex" } }}
+            onClick={handleLogoClick}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -96,7 +107,28 @@ const Navbar = () => {
             Super Twitmarks
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
-
+          {user && (
+            <Typography
+              variant="h5"
+              noWrap
+              component="button"
+              onClick={goToLikes}
+              sx={{
+                mr: 2,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                fontSize: "14px",
+                color: "inherit",
+                textDecoration: "none",
+                backgroundColor: "transparent",
+                cursor: "pointer",
+                border: "none",
+                justifyContent: "center",
+              }}
+            >
+              Browse Likes
+            </Typography>
+          )}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton
