@@ -21,18 +21,21 @@ import { TWEETS_PATH } from "../../shared/constants";
 
 const TweetDetailedView = ({
   tweet: { username, text, displayName, datePosted, url },
-}) => (
-  <div>
-    <p>
-      <strong>{displayName}</strong> @{username}
-    </p>
-    <p>{text}</p>
-    <p>{datePosted}</p>
-    <a href={url} target="_blank" rel="noreferrer">
-      {url}
-    </a>
-  </div>
-);
+}) => {
+  const date = datePosted ? new Date(datePosted).toLocaleDateString() : "";
+  return (
+    <div>
+      <p>
+        <strong>{displayName}</strong> @{username}
+      </p>
+      <p>{text}</p>
+      <p>{date}</p>
+      <a href={url} target="_blank" rel="noreferrer">
+        {url}
+      </a>
+    </div>
+  );
+};
 
 interface TweetDetails {
   text: string;

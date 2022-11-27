@@ -12,7 +12,7 @@ interface Props {
   folderId: any;
 }
 
-const regex = /^[ A-Za-z0-9_@.'/#&+-]*$/;
+const validFolderName = /^[ A-Za-z0-9_@.'/#&+-]*$/;
 
 const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
   const [folders, setFolders] = useContext(FolderContext);
@@ -46,7 +46,11 @@ const FolderCard: React.FC<Props> = ({ folderName, folderId }) => {
       setEmptyNameError(true);
       return;
     }
-    if (!regex.test(trimmed) || trimmed.length > 25 || trimmed.length === 0) {
+    if (
+      !validFolderName.test(trimmed) ||
+      trimmed.length > 25 ||
+      trimmed.length === 0
+    ) {
       setInputVal(folderName);
       setError(true);
       return;

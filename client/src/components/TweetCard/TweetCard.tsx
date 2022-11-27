@@ -54,7 +54,7 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
       sx={{
         margin: "0 auto",
         marginBottom: "10px",
-        // maxWidth: "350px",
+        width: "500px",
       }}
       className="tweet"
     >
@@ -63,12 +63,19 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
           <DeleteIcon />
         </IconButton>
       </CardActions>
-      <CardContent>
+      <CardContent
+        sx={{
+          margin: "0 auto",
+          marginBottom: "10px",
+          height: "100%",
+        }}
+      >
         <Typography color="text.primary" className="name" component="span">
           {" "}
-          {displayName || ""}
+          <strong>{displayName || ""}</strong>
         </Typography>
         <Typography color="text.secondary" className="handle" component="span">
+          {" "}
           @{username}
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
