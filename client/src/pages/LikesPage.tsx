@@ -26,7 +26,7 @@ const LikesPage = () => {
   const { isAuthenticated, loading } = authContext;
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && !loading) {
       navigate("/login");
     }
   }, [isAuthenticated, loading, navigate]);

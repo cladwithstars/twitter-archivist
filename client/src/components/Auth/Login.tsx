@@ -14,10 +14,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("loading: ", loading);
-  }, [loading]);
-
-  useEffect(() => {
     if (isAuthenticated) {
       navigate("/");
     }
@@ -36,16 +32,12 @@ const Login = () => {
     } catch {
       setLoginError(true);
     }
-
     setLoading(false);
-
-    console.log("loading 2: ", loading);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("LOADING: ", loading);
     Login();
   };
 
