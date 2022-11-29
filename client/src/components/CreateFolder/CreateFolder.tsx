@@ -28,7 +28,7 @@ const style = {
   p: 4,
 };
 
-const regex = /^[ A-Za-z0-9_@./#'&+-]*$/;
+const validFolderName = /^[ A-Za-z0-9_@./#'&+-]*$/;
 
 const CreateFolder = () => {
   const authContext = useContext(AuthContext);
@@ -74,7 +74,7 @@ const CreateFolder = () => {
       setFolderAlreadyExists(true);
       return;
     }
-    if (!regex.test(trimmed) || trimmed.length === 0) {
+    if (!validFolderName.test(trimmed) || trimmed.length === 0) {
       setInvalidFolderName(true);
       return;
     }

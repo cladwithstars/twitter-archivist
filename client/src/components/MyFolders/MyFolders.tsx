@@ -5,6 +5,7 @@ import { Grid } from "@mui/material";
 
 const MyFolders = () => {
   const [folders] = useContext(FolderContext);
+
   if (!folders?.length) {
     return <p>Your folders will appear here when you have created some</p>;
   }

@@ -14,14 +14,14 @@ import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, loading } = authContext;
+  const { isAuthenticated, loading, loadUser } = authContext;
   const [folders] = useContext(FolderContext);
 
   useEffect(() => {
-    if (localStorage.token && !authContext.isAuthenticated) {
-      authContext.loadUser();
+    if (localStorage.token && !isAuthenticated) {
+      loadUser();
     }
-  }, [authContext]);
+  }, [loadUser, isAuthenticated]);
 
   return (
     <BrowserRouter>
