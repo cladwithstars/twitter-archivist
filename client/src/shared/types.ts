@@ -13,6 +13,8 @@ export interface Tweet {
   _id?: string;
   displayPhoto?: string;
   displayName?: string;
+  retweetCount?: number;
+  favoriteCount?: number;
   datePosted?: string;
 }
 

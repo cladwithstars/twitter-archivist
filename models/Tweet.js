@@ -22,6 +22,12 @@ const TweetSchema = mongoose.Schema({
   profileImg: {
     type: String,
   },
+  retweetCount: {
+    type: Number,
+  },
+  favoriteCount: {
+    type: Number,
+  },
   dateSaved: {
     type: Date,
     default: Date.now(),

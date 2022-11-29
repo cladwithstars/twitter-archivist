@@ -13,6 +13,8 @@ import { TWEETS_PATH } from "../../shared/constants";
 import axios from "axios";
 import { Tweet } from "../../shared/types";
 import DeleteIcon from "@mui/icons-material/Delete";
+import LoopIcon from "@mui/icons-material/Loop";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 interface Props {
   tweet: Tweet;
@@ -23,7 +25,16 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
   const params = useParams();
   const folderId = params._id;
   const ourFolder = folders.find((folder) => folder._id === folderId);
-  const { url, text, username, datePosted, displayName, _id } = tweet;
+  const {
+    url,
+    text,
+    username,
+    datePosted,
+    displayName,
+    retweetCount,
+    favoriteCount,
+    _id,
+  } = tweet;
   const tweetId = _id;
 
   const date = datePosted ? new Date(datePosted).toLocaleDateString() : "";
@@ -78,7 +89,7 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
           {" "}
           @{username}
         </Typography>
-        <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
+        <Typography sx={{ fontSize: 14 }} color="text.primary">
           {text}
         </Typography>
         <hr style={{ color: "lightgrey" }} />
@@ -88,6 +99,24 @@ const TweetCard: React.FC<Props> = ({ tweet }) => {
           </a>
         </Typography>
         <Typography>{date}</Typography>
+        <Typography component="span">
+          <>
+            {retweetCount && (
+              <>
+                <LoopIcon sx={{ position: "relative", top: "5px" }} />
+                {retweetCount.toLocaleString(undefined)}
+              </>
+            )}
+            {favoriteCount && (
+              <>
+                <FavoriteIcon
+                  sx={{ position: "relative", top: "5px", marginLeft: "3px" }}
+                />
+                {favoriteCount.toLocaleString(undefined)}
+              </>
+            )}
+          </>
+        </Typography>
       </CardContent>
     </Card>
   );

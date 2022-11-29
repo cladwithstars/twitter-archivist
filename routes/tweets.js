@@ -44,13 +44,11 @@ router.get("/:username/likedTweets", async (req, res) => {
     const tweets = await client.v2.userLikedTweets(id, {
       max_results: 100,
     });
-
-    console.log("tweets: ", tweets);
-
     const formattedResult = tweets._realData.data.map((tweet) => ({
       id: tweet.id,
       text: tweet.text,
     }));
+
     res.json(formattedResult);
   } catch (error) {
     console.log(error);
@@ -84,7 +82,8 @@ router.post("/", async (req, res) => {
 
   try {
     const data = await client.v1.singleTweet(id);
-    const { full_text, user, created_at } = data;
+    console.log(data);
+    const { full_text, user, created_at, retweet_count, favorite_count } = data;
     const { screen_name, name, profile_image_url } = user;
     const newTweet = new Tweet({
       text: full_text || "",
@@ -93,6 +92,8 @@ router.post("/", async (req, res) => {
       displayName: name,
       datePosted: created_at,
       profileImg: profile_image_url,
+      retweetCount: retweet_count,
+      favoriteCount: favorite_count,
       dateSaved: Date.now(),
     });
 
