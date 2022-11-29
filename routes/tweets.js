@@ -14,14 +14,40 @@ const client = new TwitterApi({
 const Folder = require("../models/Folder");
 const Tweet = require("../models/Tweet");
 
-router.get("/:username", async (req, res) => {
+router.get("/:username/tweets", async (req, res) => {
+  const { username } = req.params;
   try {
-    const usernameLookup = await client.v2.userByUsername(req.params.username);
+    const usernameLookup = await client.v2.userByUsername(username);
     const { data } = usernameLookup;
     const { id } = data;
-    const likedTweets = await client.v2.userLikedTweets(id);
-    const likes = likedTweets._realData;
-    const formattedResult = likes.data.map((tweet) => ({
+    const tweets = await client.v2.userTimeline(id, {
+      max_results: 100,
+    });
+
+    const formattedResult = tweets._realData.data.map((tweet) => ({
+      id: tweet.id,
+      text: tweet.text,
+    }));
+    res.json(formattedResult);
+  } catch (error) {
+    console.log(error);
+    res.status(404).send("Server Error - could not get user data");
+  }
+});
+
+router.get("/:username/likedTweets", async (req, res) => {
+  const { username } = req.params;
+  try {
+    const usernameLookup = await client.v2.userByUsername(username);
+    const { data } = usernameLookup;
+    const { id } = data;
+    const tweets = await client.v2.userLikedTweets(id, {
+      max_results: 100,
+    });
+
+    console.log("tweets: ", tweets);
+
+    const formattedResult = tweets._realData.data.map((tweet) => ({
       id: tweet.id,
       text: tweet.text,
     }));

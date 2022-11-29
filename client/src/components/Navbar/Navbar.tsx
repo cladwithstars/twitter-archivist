@@ -126,7 +126,7 @@ const Navbar = () => {
                 justifyContent: "center",
               }}
             >
-              Browse Likes
+              Browse Tweets
             </Typography>
           )}
           <Box sx={{ flexGrow: 0 }}>
