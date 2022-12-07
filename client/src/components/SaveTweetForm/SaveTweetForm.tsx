@@ -49,6 +49,7 @@ const SaveTweetForm = () => {
       ]);
       setIdOrUrl("");
       setLoading(false);
+      setAlertOpen(true);
     } catch {
       setError(true);
       setLoading(false);
@@ -64,7 +65,6 @@ const SaveTweetForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setAlertOpen(true);
     setLoading(true);
     saveTweet();
   };
