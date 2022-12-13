@@ -78,7 +78,7 @@ const Navbar = () => {
               border: "none",
             }}
           >
-            Super Twitmarks
+            Twit Archivist
           </Typography>
 
           <FolderSpecialIcon
@@ -104,7 +104,7 @@ const Navbar = () => {
               justifyContent: "center",
             }}
           >
-            Super Twitmarks
+            Twit Archivist
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
           {user && (
