@@ -12,6 +12,9 @@ const HomePage = () => {
   const { isAuthenticated, loading, logout } = authContext;
 
   useEffect(() => {
+    if (!localStorage.token) {
+      navigate("/login");
+    }
     if (!isAuthenticated && !loading) {
       logout();
       navigate("/login");
