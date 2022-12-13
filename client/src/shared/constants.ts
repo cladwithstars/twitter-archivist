@@ -3,8 +3,6 @@ export const BASE_URL =
     ? "https://twit-archivist.herokuapp.com"
     : `http://localhost:5000`;
 
-// export const BASE_URL = "https://super-twitmarks.herokuapp.com";
-
 export const FOLDERS_PATH = `${BASE_URL}/api/folders`;
 
 export const TWEETS_PATH = `${BASE_URL}/api/tweets`;
