@@ -1,6 +1,6 @@
 export const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://super-twitmarks.herokuapp.com"
+    ? "https://twit-archivist.herokuapp.com"
     : `http://localhost:5000`;
 
 // export const BASE_URL = "https://super-twitmarks.herokuapp.com";
