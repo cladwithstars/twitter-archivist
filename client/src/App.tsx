@@ -8,18 +8,11 @@ import InvalidRoute from "./components/InvalidRoute";
 import Register from "./components/Auth/Register";
 import { FolderContext } from "./context/FolderContext";
 import AuthContext from "./context/auth/authContext";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import BrowseLikes from "./pages/LikesPage";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const { isAuthenticated, loading, loadUser } = authContext;
   const [folders] = useContext(FolderContext);
@@ -27,10 +20,8 @@ function App() {
   useEffect(() => {
     if (localStorage.token && !isAuthenticated) {
       loadUser();
-    } else if (!isAuthenticated) {
-      navigate("/");
     }
-  }, [loadUser, isAuthenticated]); // eslint-disable-line
+  }, [isAuthenticated]); // eslint-disable-line
 
   return (
     <BrowserRouter>
