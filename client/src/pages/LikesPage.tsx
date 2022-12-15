@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { TWEETS_PATH } from "../shared/constants";
+import React, { useEffect, useContext } from "react";
+
 import {
   TextField,
   Typography,
@@ -13,20 +12,22 @@ import {
 import TweetTable from "../components/TweetTable/TweetTable";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/auth/authContext";
-
-interface ShortTweet {
-  text: string;
-  id: string;
-}
+import tweetTableContext from "../context/TweetTable/TweetTableContext";
 
 const LikesPage = () => {
-  const [likedTweets, setLikedTweets] = useState<ShortTweet[] | null>(null);
-  const [searchString, setSearchString] = useState("");
-  const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
-  const [error, setError] = useState<string | null>(null);
   const authContext = useContext(AuthContext);
   const { isAuthenticated, loading } = authContext;
+  const {
+    tweets,
+    searchString,
+    checked,
+    error,
+    setChecked,
+    setSearchString,
+    fetchLikedTweets,
+    fetchUserTweets,
+  } = useContext(tweetTableContext);
 
   useEffect(() => {
     if (!isAuthenticated && !loading) {
@@ -35,38 +36,16 @@ const LikesPage = () => {
   }, [isAuthenticated, loading, navigate]);
 
   const handleCheckBoxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.target.checked);
+    setChecked(!checked);
   };
 
-  const fetchUserTweets = async () => {
-    try {
-      const { data } = await axios.get(`${TWEETS_PATH}/${searchString}/tweets`);
-      setLikedTweets(data);
-    } catch {
-      setError(
-        "Could not fetch tweets. Make sure the username you typed is valid."
-      );
-    }
-  };
-
-  const fetchLikedTweets = async () => {
-    try {
-      const { data } = await axios.get(
-        `${TWEETS_PATH}/${searchString}/likedTweets`
-      );
-      setLikedTweets(data);
-    } catch {
-      setError(
-        "Could not fetch tweets. Make sure the username you typed is valid."
-      );
-    }
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchString !== "") {
-      checked ? fetchUserTweets() : fetchLikedTweets();
+      checked ? fetchUserTweets(searchString) : fetchLikedTweets(searchString);
     }
   };
+
   return (
     <Container sx={{ width: "95%" }}>
       <Typography sx={{ marginTop: "30px" }}>
@@ -95,9 +74,6 @@ const LikesPage = () => {
             fullWidth
             sx={{ paddingBottom: 2 }}
             onChange={(e) => {
-              if (error) {
-                setError(null);
-              }
               setSearchString(e.target.value);
             }}
           />
@@ -119,8 +95,12 @@ const LikesPage = () => {
           </Button>
         </FormControl>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {likedTweets && <TweetTable tweets={likedTweets} />}
+      {error && (
+        <p style={{ color: "red" }}>
+          {"Could not fetch tweets. Make sure your query string is correct."}
+        </p>
+      )}
+      {tweets && tweets.length > 0 && <TweetTable tweets={tweets} />}
     </Container>
   );
 };
