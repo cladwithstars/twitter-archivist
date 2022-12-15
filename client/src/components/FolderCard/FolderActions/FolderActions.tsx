@@ -42,15 +42,10 @@ const FolderActions: React.FC<Props> = ({
     setAnchorElOptions(null);
   };
 
-  const updateContext = () => {
-    const updatedFolders = folders.filter((folder) => folder._id !== folderId);
-    setFolders(updatedFolders);
-  };
-
   const deleteFolder = async () => {
     try {
       await axios.delete(`${FOLDERS_PATH}/${folderId}`);
-      updateContext();
+      setFolders(folders.filter((folder) => folder._id !== folderId));
     } catch {
       console.error("delete folder failed");
     }
