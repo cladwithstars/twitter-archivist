@@ -89,6 +89,10 @@ React router is used for easy routing. Invalid routes show a page with a button 
 
 ## Code Snippets
 
+Folder Page UI code:
+
+![image](https://user-images.githubusercontent.com/20101874/222036533-e056b6ed-d8e2-4b40-9870-8611405829e5.png)
+
 Tweet table context code:
 
 ![image](https://user-images.githubusercontent.com/20101874/222035645-765dc8be-15b4-487c-9438-257939abd2bc.png)
@@ -96,6 +100,11 @@ Tweet table context code:
 An example route, for fetching tweets but username, on the browse tweets page:
 
 ![image](https://user-images.githubusercontent.com/20101874/222035811-10cec0e2-3bb6-418a-875f-21a74bc123e6.png)
+
+DB folder schema
+
+![image](https://user-images.githubusercontent.com/20101874/222036653-68374bbe-1a8b-49f0-970b-7d7a11f1314a.png)
+
 
 
 
