@@ -7,4 +7,4 @@ I built this using the MERN stack, Material-UI as a component library, and React
 
 See and use it live here: https://twit-archivist.herokuapp.com/
 
-Note, this application is a work in progress. 
+Note, this application is a work in progress. The code can be cleaned up and there are many more features planned for the future, such as supporting more media types.
