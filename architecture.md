@@ -16,6 +16,9 @@ Note: This document is a work in progress
   - [Performance](#performance)
   - [Routing](#routing)
 - [Rest Api](#rest-api-architecture)
+  -[Routes](#routes)
+  -[Authentication](#authentication)
+  -[Error Handling](#error-handling)
 - [Code Snippets](#code-snippets)
 
 
