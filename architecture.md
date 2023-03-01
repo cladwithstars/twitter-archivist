@@ -108,6 +108,117 @@ React router is used for easy routing. Invalid routes show a page with a button 
 
 
 
+
+## REST API Architecture
+### Introduction
+
+This REST API provides access to Twitter data and allows users to manage folders of saved tweets. The API is built using Express.js and MongoDB and interacts with the Twitter API using the twitter-api-v2 library.
+
+### Routes
+#### POST /folders
+
+This route creates a new folder and saves it to the database.
+Request
+
+    name (required): the name of the new folder
+    userId (required): the ID of the user creating the folder
+
+Response
+
+Returns the newly created folder object.
+#### GET /folders/:userId
+
+This route retrieves all folders associated with a given user ID.
+Request
+
+    userId (required): the ID of the user whose folders to retrieve
+
+Response
+
+Returns an array of all folders associated with the given user ID.
+#### DELETE /folders/:folderId
+
+This route deletes a folder with the specified ID.
+Request
+
+    folderId (required): the ID of the folder to delete
+
+Response
+
+Returns a success message if the folder was deleted successfully.
+#### PUT /folders/:folderId
+
+This route renames a folder with the specified ID.
+Request
+
+    folderId (required): the ID of the folder to rename
+    newName (required): the new name for the folder
+
+Response
+
+Returns the new name of the folder if the rename was successful.
+#### GET /tweets/:username/tweets
+
+This route retrieves the 100 most recent tweets by a given Twitter username.
+Request
+
+    username (required): the Twitter username to retrieve tweets for
+
+Response
+
+Returns an array of objects, each representing a tweet with the id and text fields.
+#### GET /tweets/:username/likedTweets
+
+This route retrieves the 100 most recent liked tweets by a given Twitter username.
+Request
+
+    username (required): the Twitter username to retrieve liked tweets for
+
+Response
+
+Returns an array of objects, each representing a liked tweet with the id and text fields.
+#### GET /tweets/details/:tweetId
+
+This route retrieves details for a single tweet with the specified ID.
+Request
+
+    tweetId (required): the ID of the tweet to retrieve details for
+
+Response
+
+Returns an object containing details for the tweet, including the text, url, username, displayName, and datePosted fields.
+#### POST /tweets
+
+This route saves a tweet to a specified folder.
+Request
+
+    idOrUrl (required): the ID or URL of the tweet to save
+    folder (required): the ID of the folder to save the tweet to
+    isUrl (required): a boolean indicating whether the idOrUrl parameter is a URL or ID
+    userId (required): the ID of the user saving the tweet
+
+Response
+
+Returns the newly created tweet object.
+
+### Authentication
+
+Dependencies:
+
+Express.js
+bcryptjs
+jsonwebtoken
+config
+express-validator
+
+This module provides authentication and authorization functionality to the API. It has two routes: one for authenticating a user and returning a JSON web token (JWT) and another for getting information about the currently logged-in user using the JWT. The authentication route accepts a user's email and password, checks whether the email exists in the database, and then compares the password with the hashed password in the database. If the password is correct, it generates a JWT with a payload containing the user's ID and a secret key, and returns the JWT to the client. The get user route requires the client to send the JWT in the authorization header, and then uses the token to extract the user ID from the payload and retrieve the corresponding user object from the database. If the token is valid and the user exists, it returns the user object without the password field.
+
+### Error Handling
+
+If any error occurs while processing a request, the API will respond with an error message and an HTTP status code indicating the type of error. In general, the API will respond with a 404 status code if the requested resource was not found, a 400 status code if the request was malformed or missing required parameters, and a 500 status code if an unexpected error occurred on the server.
+
+
+
 ## Code Snippets
 
 Folder Page UI code:
