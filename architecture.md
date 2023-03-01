@@ -1,5 +1,23 @@
 Note: This document is a work in progress
 
+## Table of Contents
+- [Motivation](#motivation)
+- [Architecture Overview](#architecture-overview)
+- [Front-end Architecture](#front-end-architecture)
+  - [Core Technologies](#core-technologies)
+  - [Pages](#pages)
+    - [Login/Registration Page](#loginregistration-page)
+    - [Home Page](#home-page)
+    - [Folder Detail Page](#folder-detail-page)
+    - [Browse Tweets Page](#browse-tweets-page)
+  - [State Management](#state-management)
+  - [Testing](#testing)
+  - [Accessibility](#accessibility)
+  - [Performance](#performance)
+  - [Routing](#routing)
+- [Code Snippets](#code-snippets)
+
+
 ## Motivation 
 This application can be thought of as an enhancement to Twitter's bookmarks feature. It allows users to easily import tweets from twitter, save them to their private account, and organize them into searchable sub-folders. Additionally, the tweets are saved forever, even if the tweet on the app is deleted or the tweet-author's account is deactivated.
 
