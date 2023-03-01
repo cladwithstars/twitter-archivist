@@ -37,16 +37,24 @@ Jest and React Testing Library
 #### Login/Registration Page
 Create account and authenticate.
 
+![image](https://user-images.githubusercontent.com/20101874/222032917-3aa1e161-b643-4a4a-a049-7774efb6fa91.png)
+
+
 #### Home Page
 Form to import tweet (via url or tweet id) and save to folder. Another form to create a new folder. All folders, which are links to folder detail page, displayed below. Can rename and delete folders from here too.
 
 ![image](https://user-images.githubusercontent.com/20101874/222032229-0fb5f3e1-efd9-45f9-bcc1-b1eccf22d109.png)
 
 #### Folder Detail Page
-View all tweets saved to specfici folder. Delete and manage tweets from here. Filter and search for tweets within folder.
+View all tweets saved to specific folder. Delete and manage tweets from here. Filter and search for tweets within folder.
+
+![image](https://user-images.githubusercontent.com/20101874/222032609-93031bc7-2be1-4845-acd2-4cae81685ec2.png)
 
 #### Browse Tweets Page
 A form to writer a twitter user's account name. When submitted, displays a table of all their tweets, which can then easily be saved to your folders without the need of copying and pasting urls or ids.
+
+![image](https://user-images.githubusercontent.com/20101874/222032820-378f95f8-4ce6-4330-955b-68dde5b9ce19.png)
+
 
 ### State Management
 
