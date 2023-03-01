@@ -25,6 +25,8 @@ Note: This document is a work in progress
 ## Motivation 
 This application can be thought of as an enhancement to Twitter's bookmarks feature. It allows users to easily import tweets from twitter, save them to their private account, and organize them into searchable sub-folders. Additionally, the tweets are saved forever, even if the tweet on the app is deleted or the tweet-author's account is deactivated.
 
+I wanted to build it because the in-app Twitter bookmarks feature is very lacking and the goal is to build something that makes it much easier to archive your favourite tweets.
+
 ## Architecture Overview
 
 ![image](https://user-images.githubusercontent.com/20101874/222025549-8460ea77-a045-494a-9fa3-a5318d6fef7e.png)
