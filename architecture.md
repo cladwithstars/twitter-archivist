@@ -236,7 +236,7 @@ Tweet table context code:
 
 ![image](https://user-images.githubusercontent.com/20101874/222035645-765dc8be-15b4-487c-9438-257939abd2bc.png)
 
-An example route, for fetching tweets but username, on the browse tweets page:
+An example route, for fetching tweets by username, on the browse tweets page:
 
 ![image](https://user-images.githubusercontent.com/20101874/222035811-10cec0e2-3bb6-418a-875f-21a74bc123e6.png)
 
