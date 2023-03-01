@@ -100,7 +100,7 @@ A form to input a twitter user's account name. When submitted, displays a table 
 I didn't find the need to use Redux for this app, so all state is handled with the useState and useReducer hooks. I also use the Context API for authentication and folder data to avoid too much prop drilling.
 
 ### Testing
-In addition to manual testing, component tests are (being) written in Jest and React Testing Library to improve robustness and prevent bugs getting into to production. TypeScript and eslint are also used in the dev process to catch bugs early.
+In addition to manual testing, component tests are written in Jest and React Testing Library to improve robustness and prevent bugs getting into to production. TypeScript and eslint are also used in the dev process to catch bugs early.
 
 ### Accessibility
 The app was built with accessibility in mind. The Material UI component library which is used throughout the app handles a lot of this out of the box. The app is keyboard-navigable and employs a high-contrast colour scheme and proper font-usage to make sure text is always legible. The UX is designed with the goal of being as intuitive as possible. It is responsive so can be used on phones, tablets, laptops, and large monitors, and also works on all major browsers. 
