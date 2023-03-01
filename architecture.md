@@ -15,6 +15,7 @@ Note: This document is a work in progress
   - [Accessibility](#accessibility)
   - [Performance](#performance)
   - [Routing](#routing)
+- [Rest Api](#rest-api-architecture)
 - [Code Snippets](#code-snippets)
 
 
