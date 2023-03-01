@@ -56,6 +56,8 @@ React Router
 
 React Context API
 
+Axios
+
 Jest and React Testing Library
 
 ### Pages
@@ -111,7 +113,6 @@ Expensive queries are avoided whenever possible (for instance in the browse twee
 React router is used for easy routing. Invalid routes show a page with a button allowing you to return home. If a user tries to access a protected route without authenticated first, they are denied.
 
 ![image](https://user-images.githubusercontent.com/20101874/222038023-d91acda8-577f-46a3-a89b-17448a5f2a5f.png)
-
 
 
 
@@ -211,11 +212,11 @@ Returns the newly created tweet object.
 
 Dependencies:
 
-Express.js
-bcryptjs
-jsonwebtoken
-config
-express-validator
+      Express.js
+      bcryptjs
+      jsonwebtoken
+      config
+      express-validator
 
 This module provides authentication and authorization functionality to the API. It has two routes: one for authenticating a user and returning a JSON web token (JWT) and another for getting information about the currently logged-in user using the JWT. The authentication route accepts a user's email and password, checks whether the email exists in the database, and then compares the password with the hashed password in the database. If the password is correct, it generates a JWT with a payload containing the user's ID and a secret key, and returns the JWT to the client. The get user route requires the client to send the JWT in the authorization header, and then uses the token to extract the user ID from the payload and retrieve the corresponding user object from the database. If the token is valid and the user exists, it returns the user object without the password field.
 
