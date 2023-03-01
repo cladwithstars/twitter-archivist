@@ -86,3 +86,16 @@ Expensive queries are avoided whenever possible (for instance in the browse twee
 
 React router is used for easy routing. Invalid routes show a page with a button allowing you to return home. If a user tries to access a protected route without authenticated first, they are denied.
 
+
+## Code Snippets
+
+Tweet table context code:
+
+![image](https://user-images.githubusercontent.com/20101874/222035645-765dc8be-15b4-487c-9438-257939abd2bc.png)
+
+An example route, for fetching tweets but username, on the browse tweets page:
+
+![image](https://user-images.githubusercontent.com/20101874/222035811-10cec0e2-3bb6-418a-875f-21a74bc123e6.png)
+
+
+
