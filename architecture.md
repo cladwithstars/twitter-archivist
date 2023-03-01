@@ -64,8 +64,12 @@ I didn't find the need to use Redux for this app, so all state is handled with t
 In addition to manual testing, component tests are written in Jest and React Testing Library to improve robustness and prevent bugs getting into to production. TypeScript and eslint are also used in the dev process to catch bugs early.
 
 ### Accessibility
-The app was built with accessibility in mind. The Material UI component library which is used throughout the app handles a lot of this out of the box. The app is keyboard-navigable and eploys a high-contrast colour scheme and proper font-usage to make sure text is always legible. The UX is designed with the goal of being as intuitive as possible. It is responsive so can be used on phones, tablets, laptops, and large monitors, and also works on all major browsers. 
+The app was built with accessibility in mind. The Material UI component library which is used throughout the app handles a lot of this out of the box. The app is keyboard-navigable and employs a high-contrast colour scheme and proper font-usage to make sure text is always legible. The UX is designed with the goal of being as intuitive as possible. It is responsive so can be used on phones, tablets, laptops, and large monitors, and also works on all major browsers. 
 
 ### Performance
 Expensive queries are avoided whenever possible (for instance in the browse tweets page a detail view is used to avoid too many fetches all at once). User data is fetched once from the DB on login and then stored in Context for instant lookup afterwards. React's Virtual DOM ensures that UI updates are seamless.
+
+### Routing
+
+React router is used for easy routing. Invalid routes show a page with a button allowing you to return home. If a user tries to access a protected route without authenticated first, they are denied.
 
