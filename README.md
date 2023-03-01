@@ -6,3 +6,5 @@ Additionally, inside the Twitter application (or on the site) you lose saved twe
 I built this using the MERN stack, Material-UI as a component library, and React's Context API for state management.
 
 See and use it live here: https://twit-archivist.herokuapp.com/
+
+Note, this application is a work in progress. 
