@@ -51,7 +51,7 @@ View all tweets saved to specific folder. Delete and manage tweets from here. Fi
 ![image](https://user-images.githubusercontent.com/20101874/222032609-93031bc7-2be1-4845-acd2-4cae81685ec2.png)
 
 #### Browse Tweets Page
-A form to writer a twitter user's account name. When submitted, displays a table of all their tweets, which can then easily be saved to your folders without the need of copying and pasting urls or ids.
+A form to input a twitter user's account name. When submitted, displays a table of all their recent tweets, which can then easily be saved to your folders without the need of copying and pasting urls or ids.
 
 ![image](https://user-images.githubusercontent.com/20101874/222032820-378f95f8-4ce6-4330-955b-68dde5b9ce19.png)
 
