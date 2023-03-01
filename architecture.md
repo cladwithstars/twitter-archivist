@@ -44,21 +44,21 @@ I chose to use MongoDB to store user data because of my familiarity with it and 
 
 ### Core Technologies
 
-React
+      React
 
-TypeScript
+      TypeScript
 
-CSS
+      CSS
 
-Material UI
+      Material UI
 
-React Router
+      React Router
 
-React Context API
+      React Context API
 
-Axios
+      Axios
 
-Jest and React Testing Library
+      Jest and React Testing Library
 
 ### Pages
 
