@@ -104,6 +104,9 @@ Expensive queries are avoided whenever possible (for instance in the browse twee
 
 React router is used for easy routing. Invalid routes show a page with a button allowing you to return home. If a user tries to access a protected route without authenticated first, they are denied.
 
+![image](https://user-images.githubusercontent.com/20101874/222038023-d91acda8-577f-46a3-a89b-17448a5f2a5f.png)
+
+
 
 ## Code Snippets
 
