@@ -15,7 +15,7 @@ Note: This document is a work in progress
   - [Accessibility](#accessibility)
   - [Performance](#performance)
   - [Routing](#routing)
-- [Rest Api](#rest-api-architecture)
+- [REST API](#rest-api-architecture)
   - [Routes](#routes)
   - [Authentication](#authentication)
   - [Error Handling](#error-handling)
