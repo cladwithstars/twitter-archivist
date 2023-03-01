@@ -47,6 +47,9 @@ Form to import tweet (via url or tweet id) and save to folder. Another form to c
 
 ![image](https://user-images.githubusercontent.com/20101874/222032229-0fb5f3e1-efd9-45f9-bcc1-b1eccf22d109.png)
 
+![image](https://user-images.githubusercontent.com/20101874/222034398-ca5a84b1-89e4-4044-badf-e313ad6e23e6.png)
+
+
 ![image](https://user-images.githubusercontent.com/20101874/222034063-cdabd606-c448-4f93-b6db-5b74f9beac67.png) ![image](https://user-images.githubusercontent.com/20101874/222034139-6d6273de-7dc6-4ba7-80e0-7bbd596b379e.png)
 
 
@@ -56,11 +59,15 @@ View all tweets saved to specific folder. Delete and manage tweets from here. Fi
 
 ![image](https://user-images.githubusercontent.com/20101874/222032609-93031bc7-2be1-4845-acd2-4cae81685ec2.png)
 
+![image](https://user-images.githubusercontent.com/20101874/222034338-356abdca-55da-4158-a20e-bbc3e339f8a3.png)
+
+
 #### Browse Tweets Page
 A form to input a twitter user's account name. When submitted, displays a table of all their recent tweets, which can then easily be saved to your folders without the need of copying and pasting urls or ids.
 
 ![image](https://user-images.githubusercontent.com/20101874/222032820-378f95f8-4ce6-4330-955b-68dde5b9ce19.png)
 
+![image](https://user-images.githubusercontent.com/20101874/222034485-85cba6dc-7255-469a-bad7-3512c104de5d.png)
 
 ### State Management
 
