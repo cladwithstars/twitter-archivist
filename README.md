@@ -1,6 +1,6 @@
 # twitter-archivist
 
-For an overview of the architecture and detailed documentation, view architecture.md.
+For an overview of the architecture and detailed documentation, view [architecture.md.](https://github.com/cladwithstars/twitter-archivist/blob/master/architecture.md)
 
 Note this app no longer works due to drastic changes in the twitter/X api after owernership changes.
 
